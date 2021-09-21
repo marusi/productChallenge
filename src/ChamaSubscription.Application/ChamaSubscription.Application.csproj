@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChamaSubscription.Domain\ChamaSubscription.Domain.csproj" />
+    <ProjectReference Include="..\ChamaSubscription.Infrastructure\ChamaSubscription.Infrastructure.csproj" />
+  </ItemGroup>
+
+FFFFhhhhh</Project>
