@@ -53,7 +53,7 @@ namespace ChamaSubAPI.Controllers
 
             var optionValue = mapper.Map<SaveOptionValueDTO, OptionValue>(optionValueResource);
 
-            optionValue.LastUpdate = DateTime.Now;
+         //   optionValue.LastUpdate = DateTime.Now;
 
             repository.Add(optionValue);
             await unitOfWork.CompleteAsync();

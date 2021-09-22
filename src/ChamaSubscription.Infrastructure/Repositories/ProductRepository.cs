@@ -25,7 +25,7 @@ namespace ChamaSubscription.Infrastructure.Repositories
 
             return await context.Products
              .Include(p => p.ProductCategory)
-
+             .Include(p => p.ProductName)
               .SingleOrDefaultAsync(p => p.Id == id);
         }
 

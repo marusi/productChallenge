@@ -49,9 +49,6 @@ namespace ChamaSubscription.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("OptionId")
                         .HasColumnType("int");
 
@@ -71,9 +68,6 @@ namespace ChamaSubscription.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("ProductCategoryId")
                         .HasColumnType("int");
@@ -95,15 +89,55 @@ namespace ChamaSubscription.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("ProductCategories");
+                });
+
+            modelBuilder.Entity("ChamaSubscription.Domain.Models.ProductSku", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("SkuValueId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SkuValueId");
+
+                    b.ToTable("ProductSkus");
+                });
+
+            modelBuilder.Entity("ChamaSubscription.Domain.Models.SkuValue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("OptionValueId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SkuValueName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OptionValueId");
+
+                    b.ToTable("SkuValues");
                 });
 
             modelBuilder.Entity("ChamaSubscription.Domain.Models.Option", b =>
@@ -137,6 +171,28 @@ namespace ChamaSubscription.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("ProductCategory");
+                });
+
+            modelBuilder.Entity("ChamaSubscription.Domain.Models.ProductSku", b =>
+                {
+                    b.HasOne("ChamaSubscription.Domain.Models.SkuValue", "SkuValue")
+                        .WithMany()
+                        .HasForeignKey("SkuValueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SkuValue");
+                });
+
+            modelBuilder.Entity("ChamaSubscription.Domain.Models.SkuValue", b =>
+                {
+                    b.HasOne("ChamaSubscription.Domain.Models.OptionValue", "OptionValue")
+                        .WithMany()
+                        .HasForeignKey("OptionValueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OptionValue");
                 });
 #pragma warning restore 612, 618
         }

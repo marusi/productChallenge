@@ -50,7 +50,7 @@ namespace ChamaSubAPI.Controllers
 
             var productCategory = mapper.Map<SaveProductCategoryDTO, ProductCategory>(productCategoryResource);
 
-            productCategory.LastUpdate = DateTime.Now;
+          //  productCategory.LastUpdate = DateTime.Now;
 
             repository.Add(productCategory);
             await unitOfWork.CompleteAsync();

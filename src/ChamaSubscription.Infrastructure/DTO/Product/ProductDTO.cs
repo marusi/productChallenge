@@ -14,6 +14,6 @@ namespace ChamaSubscription.Infrastructure.DTO.Product
         public string ProductName { get; set; }
         public KeyValuePairDTO ProductCategory { get; set; }
 
-        public DateTime LastUpdate { get; set; }
+       // public DateTime LastUpdate { get; set; }
     }
 }

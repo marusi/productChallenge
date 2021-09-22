@@ -17,6 +17,6 @@ namespace ChamaSubscription.Infrastructure.DTO.Option
    // public ProductDTO Product { get; set; }
     public OptionDTO Option { get; set; }
 
-    public DateTime LastUpdate { get; set; }
+  //  public DateTime LastUpdate { get; set; }
 }
 }

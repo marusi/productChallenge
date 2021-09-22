@@ -15,6 +15,8 @@ namespace ChamaSubscription.Infrastructure
         public DbSet<Product> Products {  get; set; }
         public DbSet<Option> Options {  get; set; }
         public DbSet<OptionValue> OptionValues {  get; set; }
+        public DbSet<SkuValue> SkuValues {  get; set; }
+        public DbSet<ProductSku> ProductSkus {  get; set; }
 
         public ChamaSubscriptionDbContext(DbContextOptions<ChamaSubscriptionDbContext> options)
             : base(options)

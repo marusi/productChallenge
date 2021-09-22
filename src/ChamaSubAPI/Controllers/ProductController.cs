@@ -36,21 +36,23 @@ namespace ChamaSubAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<ProductDTO>> GetProducts()
         {
-            var standardProducts = await context.Products.Include(p => p.ProductCategory).ToListAsync();
+            var standardProducts = await context.Products.
+                Include(p => p.ProductCategory).
+                ToListAsync();
 
             return mapper.Map<List<Product>, List<ProductDTO>>(standardProducts);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody] SaveProductDTO productResource)
+        public async Task<IActionResult> CreateProduct([FromBody] SaveProductSkuDTO productResource)
         {
             // error handling
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var product = mapper.Map<SaveProductDTO, Product>(productResource);
+            var product = mapper.Map<SaveProductSkuDTO, Product>(productResource);
 
-            product.LastUpdate = DateTime.Now;
+          //  product.LastUpdate = DateTime.Now;
 
             repository.Add(product);
             await unitOfWork.CompleteAsync();

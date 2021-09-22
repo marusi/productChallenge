@@ -19,7 +19,7 @@ namespace ChamaSubscription.Domain.Models
         public int OptionId { get; set; }
 
         public string OptionValueName { get; set; }
-        public DateTime LastUpdate { get; set; }
+      //  public DateTime LastUpdate { get; set; }
 
       //  public Product Product { get; set; } 
         public Option Option { get; set; } 
