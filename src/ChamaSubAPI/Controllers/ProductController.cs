@@ -36,7 +36,7 @@ namespace ChamaSubAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<ProductDTO>> GetProducts()
         {
-            var standardProducts = await context.Products.ToListAsync();
+            var standardProducts = await context.Products.Include(p => p.ProductCategory).ToListAsync();
 
             return mapper.Map<List<Product>, List<ProductDTO>>(standardProducts);
         }

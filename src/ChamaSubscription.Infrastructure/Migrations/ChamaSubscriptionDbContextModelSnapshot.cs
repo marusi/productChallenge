@@ -19,6 +19,52 @@ namespace ChamaSubscription.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ChamaSubscription.Domain.Models.Option", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OptionName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Options");
+                });
+
+            modelBuilder.Entity("ChamaSubscription.Domain.Models.OptionValue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OptionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OptionValueName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OptionId");
+
+                    b.ToTable("OptionValues");
+                });
+
             modelBuilder.Entity("ChamaSubscription.Domain.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -58,6 +104,28 @@ namespace ChamaSubscription.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductCategories");
+                });
+
+            modelBuilder.Entity("ChamaSubscription.Domain.Models.Option", b =>
+                {
+                    b.HasOne("ChamaSubscription.Domain.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ChamaSubscription.Domain.Models.OptionValue", b =>
+                {
+                    b.HasOne("ChamaSubscription.Domain.Models.Option", "Option")
+                        .WithMany()
+                        .HasForeignKey("OptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Option");
                 });
 
             modelBuilder.Entity("ChamaSubscription.Domain.Models.Product", b =>

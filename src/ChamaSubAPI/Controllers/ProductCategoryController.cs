@@ -9,6 +9,7 @@ using ChamaSubscription.Domain.Services;
 using ChamaSubscription.Infrastructure;
 using ChamaSubscription.Infrastructure.DTO;
 using ChamaSubscription.Domain.Models;
+using ChamaSubscription.Infrastructure.DTO.Category;
 
 namespace ChamaSubAPI.Controllers
 {

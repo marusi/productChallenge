@@ -1,7 +1,3 @@
-C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\obj\Debug\net5.0\ChamaSubscription.Infrastructure.DI.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\obj\Debug\net5.0\ChamaSubscription.Infrastructure.DI.AssemblyInfoInputs.cache
-C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\obj\Debug\net5.0\ChamaSubscription.Infrastructure.DI.AssemblyInfo.cs
-C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\obj\Debug\net5.0\ChamaSubscription.Infrastructure.DI.csproj.CoreCompileInputs.cache
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\bin\Debug\net5.0\ChamaSubscription.Infrastructure.DI.deps.json
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\bin\Debug\net5.0\ChamaSubscription.Infrastructure.DI.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\bin\Debug\net5.0\ref\ChamaSubscription.Infrastructure.DI.dll
@@ -13,7 +9,10 @@ C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructur
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\bin\Debug\net5.0\ChamaSubscription.Domain.pdb
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\bin\Debug\net5.0\ChamaSubscription.Domain.Framework.pdb
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\obj\Debug\net5.0\ChamaSubscription.Infrastructure.DI.csproj.AssemblyReference.cache
+C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\obj\Debug\net5.0\ChamaSubscription.Infrastructure.DI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\obj\Debug\net5.0\ChamaSubscription.Infrastructure.DI.AssemblyInfoInputs.cache
+C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\obj\Debug\net5.0\ChamaSubscription.Infrastructure.DI.AssemblyInfo.cs
+C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\obj\Debug\net5.0\ChamaSubscription.Infrastructure.DI.csproj.CoreCompileInputs.cache
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\obj\Debug\net5.0\ChamaSubscription.Infrastructure.DI.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\obj\Debug\net5.0\ref\ChamaSubscription.Infrastructure.DI.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\obj\Debug\net5.0\ChamaSubscription.Infrastructure.DI.pdb
-C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure.DI\obj\Debug\net5.0\ChamaSubscription.Infrastructure.DI.csproj.CopyComplete
