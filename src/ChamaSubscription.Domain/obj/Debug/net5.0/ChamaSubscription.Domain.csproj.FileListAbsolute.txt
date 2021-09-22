@@ -12,3 +12,4 @@ C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain\obj\De
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain\obj\Debug\net5.0\ChamaSubscription.Domain.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain\obj\Debug\net5.0\ref\ChamaSubscription.Domain.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain\obj\Debug\net5.0\ChamaSubscription.Domain.pdb
+C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain\obj\Debug\net5.0\ChamaSubscription.Domain.csproj.CopyComplete

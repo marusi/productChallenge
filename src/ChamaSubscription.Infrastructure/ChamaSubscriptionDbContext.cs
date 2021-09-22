@@ -13,6 +13,7 @@ namespace ChamaSubscription.Infrastructure
         public DbSet<ProductCategory> ProductCategories { get; set; }
 
         public DbSet<Product> Products {  get; set; }
+        public DbSet<CompositeProduct> CompositeProducts {  get; set; }
         public DbSet<Option> Options {  get; set; }
         public DbSet<OptionValue> OptionValues {  get; set; }
         public DbSet<SkuValue> SkuValues {  get; set; }
@@ -27,7 +28,9 @@ namespace ChamaSubscription.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            //many to many relationship
+            modelBuilder.Entity<CombinedProduct>().HasKey(ps =>
+               new { ps.CompositeProductId, ps.ProductSkuId });
 
 
 

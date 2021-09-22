@@ -3,10 +3,12 @@ using ChamaSubscription.Domain.Models;
 using ChamaSubscription.Infrastructure;
 using ChamaSubscription.Infrastructure.DTO;
 using ChamaSubscription.Infrastructure.DTO.Category;
+using ChamaSubscription.Infrastructure.DTO.CompositeProduct;
 using ChamaSubscription.Infrastructure.DTO.Option;
 using ChamaSubscription.Infrastructure.DTO.Product;
 using ChamaSubscription.Infrastructure.DTO.ProductSku;
 using ChamaSubscription.Infrastructure.DTO.SkuValue;
+using System.Linq;
 
 namespace ChamaSubAPI.Mapping
 {
@@ -36,6 +38,14 @@ namespace ChamaSubAPI.Mapping
             CreateMap<ProductSku, ProductSkuDTO>()
               .ForMember(s => s.SkuValue, opt => opt.MapFrom(p => p.SkuValue))
                .ForMember(s => s.Price, opt => opt.MapFrom(o => o.Price));
+            CreateMap<CompositeProduct, SaveCompositeProductDTO>()
+                 .ForMember(pr => pr.CombinedProducts, opt => opt.MapFrom(p => p.CombinedProducts.Select(ps => ps.ProductSkuId)))
+                .ForMember(pr => pr.TotalPrice, opt => opt.MapFrom(p => p.TotalPrice));
+            CreateMap<CompositeProduct, CompositeProductDTO>()
+                .ForMember(pr => pr.TotalPrice, opt => opt.MapFrom(p => p.TotalPrice))
+                .ForMember(pr => pr.CombinedProducts, opt => opt.MapFrom(p => p.CombinedProducts.Select(ps => new ProductSkuDTO
+                { Id = ps.ProductSku.Id, Price = ps.ProductSku.Price })));
+
 
             //API DTO to Domain
             CreateMap<SaveProductCategoryDTO, ProductCategory>()
@@ -50,6 +60,22 @@ namespace ChamaSubAPI.Mapping
           .ForMember(p => p.Id, opt => opt.Ignore());
             CreateMap<SaveProductSkuDTO, ProductSku>()
         .ForMember(p => p.Id, opt => opt.Ignore());
+            CreateMap<SaveCompositeProductDTO,CompositeProduct>()
+                .ForMember(p => p.Id, opt => opt.Ignore())
+                .ForMember(p => p.TotalPrice, opt => opt.MapFrom(pr => pr.TotalPrice))
+                .ForMember(p => p.CombinedProducts, opt => opt.Ignore())
+               .AfterMap((ps, p) => {
+                   // Remove unselected Products
+                   var removedProducts = p.CombinedProducts.Where(s => !ps.CombinedProducts.Contains(s.ProductSkuId));
+                   foreach (var s in removedProducts)
+                       p.CombinedProducts.Remove(s);
+
+                   // Add new Products
+                   var addedProducts = ps.CombinedProducts.Where(id => !p.CombinedProducts.Any(s => s.ProductSkuId == id)).Select(id => new CombinedProduct { ProductSkuId = id });
+                   foreach (var s in addedProducts)
+                       p.CombinedProducts.Add(s);
+               });
+
         }
     }
 }
