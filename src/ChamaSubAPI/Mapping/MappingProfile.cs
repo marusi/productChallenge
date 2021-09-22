@@ -27,8 +27,7 @@ namespace ChamaSubAPI.Mapping
                 .ForMember(pr => pr.OptionName, opt => opt.MapFrom(p => p.OptionName));
             CreateMap<OptionValue, SaveOptionValueDTO>();
             CreateMap<OptionValue, OptionValueDTO>()
-              // .ForMember(pr => pr.Product, opt => opt.MapFrom(p => p.Product))
-               .ForMember(pr => pr.Option, opt => opt.MapFrom(p => p.Option.Product))
+               .ForMember(pr => pr.Option, opt => opt.MapFrom(p => p.Option))
                 .ForMember(pr => pr.OptionValueName, opt => opt.MapFrom(p => p.OptionValueName));
 
             //API DTO to Domain
