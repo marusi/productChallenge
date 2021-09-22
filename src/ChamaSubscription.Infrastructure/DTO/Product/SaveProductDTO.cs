@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ChamaSubscription.Infrastructure.DTO.Product
+{
+  public  class SaveProductDTO
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public int ProductCategoryId { get; set; }
+    }
+}

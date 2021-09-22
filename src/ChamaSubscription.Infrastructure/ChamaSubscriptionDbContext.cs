@@ -12,6 +12,8 @@ namespace ChamaSubscription.Infrastructure
         // converting classes to tables code first migration
         public DbSet<ProductCategory> ProductCategories { get; set; }
 
+        public DbSet<Product> Products {  get; set; }
+
         public ChamaSubscriptionDbContext(DbContextOptions<ChamaSubscriptionDbContext> options)
             : base(options)
         {

@@ -72,3 +72,4 @@ C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\obj\Debug\net5.0\Ch
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\bin\Debug\net5.0\Humanizer.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\obj\Debug\net5.0\ChamaSubAPI.csproj.CopyComplete

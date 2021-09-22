@@ -17,6 +17,8 @@ namespace ChamaSubscription.Domain.Models
 
         public string ProductName {  get; set; }
 
+        public DateTime LastUpdate { get; set; }
+
         public ProductCategory ProductCategory { get; set; }
     }
 }
