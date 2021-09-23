@@ -36,6 +36,7 @@
           "ChamaSubscription.Infrastructure.DI": "1.0.0",
           "Microsoft.AspNetCore.SpaServices.Extensions": "5.0.10",
           "Microsoft.EntityFrameworkCore.Design": "5.0.10",
+          "Microsoft.TypeScript.MSBuild": "4.4.2",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.11.1",
           "Swashbuckle.AspNetCore": "5.6.3",
           "Swashbuckle.AspNetCore.Filters": "7.0.2",
@@ -729,6 +730,7 @@
           "lib/netstandard2.0/Microsoft.OpenApi.dll": {}
         }
       },
+      "Microsoft.TypeScript.MSBuild/4.4.2": {},
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.11.1": {},
       "Microsoft.Win32.Registry/4.7.0": {
         "dependencies": {
@@ -3477,6 +3479,13 @@
       "sha512": "sha512-Nug3rO+7Kl5/SBAadzSMAVgqDlfGjJZ0GenQrLywJ84XGKO0uRqkunz5Wyl0SDwcR71bAATXvSdbdzPrYRYKGw==",
       "path": "microsoft.openapi/1.2.3",
       "hashPath": "microsoft.openapi.1.2.3.nupkg.sha512"
+    },
+    "Microsoft.TypeScript.MSBuild/4.4.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-n/yIf3x4GBAGS3c6i8Jaen0aGTteI4ym7PskmQ/Aex4J/kYEdhwAhF707NSIeCYa+hBGqjYBaevSw4FzD+ZrPg==",
+      "path": "microsoft.typescript.msbuild/4.4.2",
+      "hashPath": "microsoft.typescript.msbuild.4.4.2.nupkg.sha512"
     },
     "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.11.1": {
       "type": "package",

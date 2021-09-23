@@ -44,13 +44,13 @@ namespace ChamaSubAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody] SaveProductSkuDTO productResource)
+        public async Task<IActionResult> CreateProduct([FromBody] SaveProductDTO productResource)
         {
             // error handling
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var product = mapper.Map<SaveProductSkuDTO, Product>(productResource);
+            var product = mapper.Map<SaveProductDTO, Product>(productResource);
 
           //  product.LastUpdate = DateTime.Now;
 

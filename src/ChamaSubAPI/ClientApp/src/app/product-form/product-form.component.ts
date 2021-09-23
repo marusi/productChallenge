@@ -18,9 +18,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProductFormComponent implements OnInit {
 
   private categoryItems: any[];
-  private subCategoryItems: any[];
 
-  private suppliers: any[];
+  private category: any = {
+    id: 0,
+    name: ''
+  }
+
+  private productName: any = {
+    id: 0,
+    productName: '',
+    productCategoryId: 0,
+  }
  /* private product: any = {
     id: 0,
     categoryItemId: 0,
@@ -92,7 +100,20 @@ export class ProductFormComponent implements OnInit {
         this.snackBarService.showSnackBar('Product created successfuly');
       });
   } */
+  submitCategory() {
+    this.productService.createCategory(this.category)
+      .subscribe(x => {
+        // toast notification to be provided here
+       // console.log('category  successfuly created')
+      });
+  }
 
+  submitProductName() {
+    this.productService.createProductName(this.productName)
+      .subscribe(x => {
+        console.log('name  successfuly created')
+      });
+  }
 
 
 

@@ -20,7 +20,7 @@ namespace ChamaSubAPI.Mapping
             CreateMap<ProductCategory, SaveProductCategoryDTO>();
             CreateMap<ProductCategory, ProductCategoryDTO>();
             CreateMap<ProductCategory, KeyValuePairDTO>();
-            CreateMap<Product, SaveProductSkuDTO>();
+            CreateMap<Product, SaveProductDTO>();
             CreateMap<Product, ProductDTO>()
                .ForMember(pr => pr.ProductCategory, opt => opt.MapFrom(p => p.ProductCategory))
                 .ForMember(pr => pr.ProductName, opt => opt.MapFrom(p => p.ProductName));
@@ -50,7 +50,7 @@ namespace ChamaSubAPI.Mapping
             //API DTO to Domain
             CreateMap<SaveProductCategoryDTO, ProductCategory>()
             .ForMember(p => p.Id, opt => opt.Ignore());
-            CreateMap<SaveProductSkuDTO, Product>()
+            CreateMap<SaveProductDTO, Product>()
             .ForMember(p => p.Id, opt => opt.Ignore());
             CreateMap<SaveOptionDTO, Option>()
             .ForMember(p => p.Id, opt => opt.Ignore());
