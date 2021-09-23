@@ -1,45 +1,32 @@
-<header>
-  <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
-  >
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">I C#</a>
-      <p>and dont do this keep calm thing</p>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-        [ngClass]="{ show: isExpanded }"
-      >
-        <ul class="navbar-nav flex-grow">
-          <li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+
+
+<div class="jumbotron page-header theme-default">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 ">
+
+        <div class="type-h4">
+         
+          <a href="#" [routerLink]="['/']"> Deleted</a>
+        </div>
+
+      </div>
+      <div class="col-md-12 ">
+
+
+
+        <ul class="nav nav-pills">
+          <li role="presentation">
+            <a href="#nav-item-1" [routerLink]="['/products/new']">New Product</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/products/new']"
-              >New Products</a
-            >
+          <li role="presentation">
+            <a href="#nav-item-2">To be continued</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
-            >
-          </li>
+         
         </ul>
       </div>
     </div>
-  </nav>
-</header>
+  </div>
+</div>
+
+

@@ -8,8 +8,8 @@
 
 
 
-<div class="container ">
-  <div class="col-sm-8  ">
+
+  <div class="col-sm-6  ">
 
     <ol class="list-items">
       <li class="list-items-row">
@@ -89,7 +89,39 @@
               <div class="col-md-4 text-right">
                 <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
               </div>
-              {{ option | json}}
+
+
+            </div>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-items-row">
+        <div data-toggle="collapse" aria-expanded="false" data-target="#list-item-line-optionValues">
+          <div class="row">
+            <h5>Option Values</h5>
+          </div>
+        </div>
+
+        <div class="collapse" id="list-item-line-optionValues">
+          <form #f="ngForm" (ngSubmit)="submitOptionValue()" novalidate id="add-optionValues-form" action="">
+            <div class="row">
+              <div class="col-md-18 col-md-offset-2">
+                <input name="optionValue" id="optionValue" [(ngModel)]="optionValue.optionValueName" type="text" class="form-control" placeholder="New Name " />
+                <div class="form-group">
+                  <label for="categoryItem">Select Option:</label>
+                  <select id="optionId" name="optionId" [(ngModel)]="optionValue.optionId" class="form-control">
+                    <option value="">Option Name is blank :(-</option>
+                    <option *ngFor="let o of options " value="{{ o.id }}"> {{ o.optionName}} </option>
+
+                  </select>
+
+                </div>
+              </div>
+              <div class="col-md-4 ">
+                <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
+              </div>
+              {{optionValue | json}}
 
             </div>
           </form>
@@ -104,35 +136,10 @@
  
 
 
-      <div class="row">
-        <div class="form-group">
-
-          <div class="col-sm-12">  </div>
-          <div class="col-sm-12">   </div>
-
-
-        </div>
-
-
-
-      </div>
-
+     
 
 
 
   </div>
 
-  <div class="col-sm-16  ">
- 
-  </div>
-
-
-</div>
-
-
-
-
-
-
-
-
+  <div class="col-sm-18 "></div>

@@ -82,4 +82,3 @@ C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\obj\Debug\net5.0\Ch
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\obj\Debug\net5.0\ref\ChamaSubAPI.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\obj\Debug\net5.0\ChamaSubAPI.pdb
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\obj\Debug\net5.0\ChamaSubAPI.genruntimeconfig.cache
-C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\obj\Debug\net5.0\ChamaSubAPI.csproj.CopyComplete

@@ -19,6 +19,7 @@ export class ProductFormComponent implements OnInit {
 
   private categoryItems: any[];
   private productNames: any[];
+  private options: any[];
 
   private category: any = {
     id: 0,
@@ -36,14 +37,13 @@ export class ProductFormComponent implements OnInit {
     optionName: '',
     productId: 0,
   }
- /* private product: any = {
+
+  private optionValue: any = {
     id: 0,
-    categoryItemId: 0,
-    subCategoryItemId: 0,
-    suppliers: [],
-    info: {},
-    sell: {}
-  }; */
+    optionValueName: '',
+    optionId: 0,
+  }
+
 
   constructor(
     private productService: ProductService,
@@ -65,6 +65,9 @@ export class ProductFormComponent implements OnInit {
 
     this.productService.getProductNames().subscribe(productNames =>
       this.productNames = productNames)
+
+    this.productService.getOptions().subscribe(options =>
+      this.options = options)
 
 
 
@@ -129,6 +132,13 @@ export class ProductFormComponent implements OnInit {
     this.productService.createOptions(this.option)
       .subscribe(x => {
         console.log('Option Name  successfuly created')
+      });
+  }
+
+  submitOptionValue() {
+    this.productService.createOptionValues(this.optionValue)
+      .subscribe(x => {
+        console.log('Option Value  successfuly created')
       });
   }
 
