@@ -1,21 +1,22 @@
+using ChamaSubscription.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using vega.Core.Models;
 
-namespace vega.Extensions
+
+namespace ChamaSubscription.Domain.Extensions
 {
     public static class IQueryableExtensions
     {
 
-      public static IQueryable<Vehicle> ApplyFiltering(this IQueryable<Vehicle> query, VehicleQuery queryObj)
+      public static IQueryable<ProductSku> ApplyFiltering(this IQueryable<ProductSku> query, ProductSkuQuery queryObj)
       {
-        if (queryObj.MakeId.HasValue)
-          query = query.Where(v => v.Model.MakeId == queryObj.MakeId.Value);
+        if (queryObj.ProductCategoryId.HasValue)
+          query = query.Where(v => v.SkuValue.OptionValueId == queryObj.ProductCategoryId.Value);
 
-        if (queryObj.ModelId.HasValue)
-          query = query.Where(v => v.ModelId == queryObj.ModelId.Value);
+      //  if (queryObj.OptionValueId.HasValue)
+         // query = query.Where(v => v.OptionValue.OptionValueId == queryObj.Id.Value);
 
         return query; 
       }

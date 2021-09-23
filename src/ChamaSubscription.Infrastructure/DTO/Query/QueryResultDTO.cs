@@ -1,13 +1,11 @@
-﻿using System;
 using System.Collections.Generic;
 
-
-namespace ChamaSubscription.Domain.Models
+namespace ChamaSubscription.Infrastructure.DTO.Query
 {
-   public class QueryResult<T>
+    public class QueryResultDTO<T>
+
     {
         public int TotalItems { get; set; }
         public IEnumerable<T> Items { get; set; }
-
     }
 }
