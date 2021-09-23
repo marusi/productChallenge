@@ -5,7 +5,8 @@
  * Licensed under WINJS Things
  */
 
-
+@import "~@angular/material/prebuilt-themes/purple-green.css";
+@import "../node_modules/ngx-toastr/toastr.css";
 
 
 
