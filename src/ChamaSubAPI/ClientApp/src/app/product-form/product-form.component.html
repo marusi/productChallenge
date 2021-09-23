@@ -47,7 +47,7 @@
                 <input name="productName" id="productName" [(ngModel)]="productName.productName" type="text" class="form-control" placeholder="New Name " />
                 <div class="form-group">
                   <label for="categoryItem">Select Category:</label>
-                  <select name="productCategoryId" [(ngModel)]="productName.productCategoryId"  class="form-control">
+                  <select name="productCategoryId" [(ngModel)]="productName.productCategoryId" class="form-control">
                     <option value="">Category is blank :(-</option>
                     <option *ngFor="let c of categoryItems " value="{{ c.id }}"> {{ c.name}} </option>
 
@@ -59,7 +59,38 @@
                 <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
               </div>
 
-           
+
+            </div>
+          </form>
+        </div>
+      </li>
+      <li class="list-items-row">
+        <div data-toggle="collapse" aria-expanded="false" data-target="#list-item-line-option">
+          <div class="row">
+            <h5>Product Option</h5>
+          </div>
+        </div>
+
+        <div class="collapse" id="list-item-line-option">
+          <form #f="ngForm" (ngSubmit)="submitOption()" novalidate id="add-productOption-form" action="">
+            <div class="row">
+              <div class="col-md-18 col-md-offset-2">
+                <input name="option" id="option" [(ngModel)]="option.optionName" type="text" class="form-control" placeholder="New Name " />
+                <div class="form-group">
+                  <label for="categoryItem">Select Category:</label>
+                  <select name="productId" [(ngModel)]="option.productId" class="form-control">
+                    <option value="">Product Name is blank :(-</option>
+                    <option *ngFor="let p of productNames " value="{{ p.id }}"> {{ p.productName}} </option>
+
+                  </select>
+
+                </div>
+              </div>
+              <div class="col-md-4 text-right">
+                <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
+              </div>
+              {{ option | json}}
+
             </div>
           </form>
         </div>

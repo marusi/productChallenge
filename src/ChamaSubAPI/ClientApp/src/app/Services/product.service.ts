@@ -13,6 +13,7 @@ export class ProductService {
   private readonly singleProducts = '/api/productAttributes';
   private readonly categories = '/api/categories';
   private readonly productNames = '/api/products';
+  private readonly options = '/api/options';
 
   constructor(private http: HttpClient) { }
 
@@ -27,14 +28,17 @@ export class ProductService {
   
 
   getOptions() {
-    return this.http.get<any>('/api/options');
+    return this.http.get<any>(this.options);
+  }
+  createOptions(option) {
+    return this.http.post(this.options, option)
   }
 
   getOptionValues() {
     return this.http.get<any>('/api/optionValues');
   }
 
-  getProductNames(productName) {
+  getProductNames() {
     return this.http.get<any>(this.productNames);
   }
 

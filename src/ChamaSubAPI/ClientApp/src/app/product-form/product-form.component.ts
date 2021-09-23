@@ -18,6 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProductFormComponent implements OnInit {
 
   private categoryItems: any[];
+  private productNames: any[];
 
   private category: any = {
     id: 0,
@@ -28,6 +29,12 @@ export class ProductFormComponent implements OnInit {
     id: 0,
     productName: '',
     productCategoryId: 0,
+  }
+
+  private option: any = {
+    id: 0,
+    optionName: '',
+    productId: 0,
   }
  /* private product: any = {
     id: 0,
@@ -56,7 +63,8 @@ export class ProductFormComponent implements OnInit {
     this.productService.getCategoryItems().subscribe(categoryItems =>
       this.categoryItems = categoryItems);
 
-   
+    this.productService.getProductNames().subscribe(productNames =>
+      this.productNames = productNames)
 
 
 
@@ -113,8 +121,15 @@ export class ProductFormComponent implements OnInit {
       .subscribe(x => {
         console.log('name  successfuly created')
       });
+
+
   }
 
-
+  submitOption() {
+    this.productService.createOptions(this.option)
+      .subscribe(x => {
+        console.log('Option Name  successfuly created')
+      });
+  }
 
 }

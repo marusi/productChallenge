@@ -18,13 +18,15 @@ namespace ChamaSubscription.Infrastructure.DI
 
            
 
+
             services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOptionRepository, OptionRepository>();
             services.AddScoped<IOptionValueRepository, OptionValueRepository>();
             services.AddScoped<ISkuValueRepository, SkuValueRepository>();
             services.AddScoped<IProductSkuRepository, ProductSkuRepository>();
-          
+            services.AddScoped<ICompositeProductRepository, CompositeProductRepository>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         
         }
