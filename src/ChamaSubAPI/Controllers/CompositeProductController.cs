@@ -49,6 +49,7 @@ namespace ChamaSubAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCompositeProduct([FromBody] SaveCompositeProductDTO productResource)
         {
+           
             // error handling
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
