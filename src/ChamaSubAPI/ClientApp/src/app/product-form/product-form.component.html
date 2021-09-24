@@ -9,7 +9,7 @@
 
 
 
-  <div class="col-sm-12  ">
+  <div class="col-sm-8  ">
 
     <ol class="list-items">
       <li class="list-items-row">
@@ -22,12 +22,11 @@
         <div class="collapse" id="list-item-line-category">
           <form #f="ngForm" (ngSubmit)="submitCategory()" novalidate id="add-guardian-form" action="">
             <div class="row">
-              <div class="col-md-18 col-md-offset-2">
+              <div class="col-md-18 ">
                 <input name="category" id="category" [(ngModel)]="category.name" type="text" class="form-control" placeholder="New Category " />
-              </div>
-              <div class="col-md-4 text-right">
                 <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
               </div>
+            
             </div>
           </form>
         </div>
@@ -54,8 +53,7 @@
                   </select>
 
                 </div>
-              </div>
-              <div class="col-md-4 text-right">
+            
                 <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
               </div>
 
@@ -85,8 +83,7 @@
                   </select>
 
                 </div>
-              </div>
-              <div class="col-md-4 text-right">
+           
                 <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
               </div>
 
@@ -117,8 +114,7 @@
                   </select>
 
                 </div>
-              </div>
-              <div class="col-md-4 ">
+           
                 <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
               </div>
            
@@ -149,11 +145,10 @@
                   </select>
 
                 </div>
-              </div>
-              <div class="col-md-4 ">
+           
                 <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
               </div>
-              {{skuValue | json}}
+           
 
             </div>
           </form>
@@ -174,4 +169,4 @@
 
   </div>
 
-  <div class="col-sm-12 "></div>
+  <div class="col-sm-16 "></div>
