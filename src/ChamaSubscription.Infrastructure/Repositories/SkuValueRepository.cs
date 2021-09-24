@@ -27,7 +27,7 @@ namespace ChamaSubscription.Infrastructure.Repositories
             
              .Include(s => s.OptionValue)
                  .ThenInclude(a => a.Option)
-                .Include(a => a.SkuValueName)
+               // .Include(a => a.SkuValueName)
 
               .SingleOrDefaultAsync(o => o.Id == id);
         }

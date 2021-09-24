@@ -9,7 +9,7 @@
 
 
 
-  <div class="col-sm-6  ">
+  <div class="col-sm-12  ">
 
     <ol class="list-items">
       <li class="list-items-row">
@@ -121,7 +121,39 @@
               <div class="col-md-4 ">
                 <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
               </div>
-              {{optionValue | json}}
+           
+
+            </div>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-items-row">
+        <div data-toggle="collapse" aria-expanded="false" data-target="#list-item-line-skuValues">
+          <div class="row">
+            <h5>SKU Values</h5>
+          </div>
+        </div>
+
+        <div class="collapse" id="list-item-line-skuValues">
+          <form #f="ngForm" (ngSubmit)="submitSkuValue()" novalidate id="add-skuValues-form" action="">
+            <div class="row">
+              <div class="col-md-18 col-md-offset-2">
+                <input name="skuValue" id="skuValue" [(ngModel)]="skuValue.skuValueName" type="text" class="form-control" placeholder="New Name " />
+                <div class="form-group">
+                  <label for="categoryItem">Select OptionValue:</label>
+                  <select id="optionValueId" name="optionValueId" [(ngModel)]="skuValue.optionValueId" class="form-control">
+                    <option value="">Option Value Name is blank :(-</option>
+                    <option *ngFor="let o of optionValues " value="{{ o.id }}"> {{ o.optionValueName}} </option>
+
+                  </select>
+
+                </div>
+              </div>
+              <div class="col-md-4 ">
+                <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
+              </div>
+              {{skuValue | json}}
 
             </div>
           </form>
@@ -142,4 +174,4 @@
 
   </div>
 
-  <div class="col-sm-18 "></div>
+  <div class="col-sm-12 "></div>

@@ -15,6 +15,7 @@ export class ProductService {
   private readonly productNames = '/api/products';
   private readonly options = '/api/options';
   private readonly optionValues = '/api/optionValues';
+  private readonly skuValues = '/api/skuvalues';
 
   constructor(private http: HttpClient) { }
 
@@ -53,7 +54,12 @@ export class ProductService {
 
 
   getSkuValues() {
-    return this.http.get<any>('/api/skuvalues');
+    return this.http.get<any>(this.skuValues);
+
+  }
+
+  createSkuValues(skuValue) {
+    return this.http.post(this.skuValues, skuValue);
 
   }
 

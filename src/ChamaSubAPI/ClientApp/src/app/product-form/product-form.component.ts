@@ -20,6 +20,8 @@ export class ProductFormComponent implements OnInit {
   private categoryItems: any[];
   private productNames: any[];
   private options: any[];
+  private optionValues: any[];
+  private skuValues: any[];
 
   private category: any = {
     id: 0,
@@ -42,6 +44,12 @@ export class ProductFormComponent implements OnInit {
     id: 0,
     optionValueName: '',
     optionId: 0,
+  }
+
+  private skuValue: any = {
+    id: 0,
+    skuValueName: '',
+    optionValueId: 0,
   }
 
 
@@ -68,6 +76,9 @@ export class ProductFormComponent implements OnInit {
 
     this.productService.getOptions().subscribe(options =>
       this.options = options)
+
+    this.productService.getOptionValues().subscribe(optionValues =>
+      this.optionValues = optionValues)
 
 
 
@@ -139,6 +150,13 @@ export class ProductFormComponent implements OnInit {
     this.productService.createOptionValues(this.optionValue)
       .subscribe(x => {
         console.log('Option Value  successfuly created')
+      });
+  }
+
+  submitSkuValue() {
+    this.productService.createSkuValues(this.skuValue)
+      .subscribe(x => {
+        console.log('Sku Value  successfuly created')
       });
   }
 
