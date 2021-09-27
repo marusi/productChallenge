@@ -26,7 +26,7 @@
                 <input name="category" id="category" [(ngModel)]="category.name" type="text" class="form-control" placeholder="New Category " />
                 <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
               </div>
-            
+
             </div>
           </form>
         </div>
@@ -53,7 +53,7 @@
                   </select>
 
                 </div>
-            
+
                 <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
               </div>
 
@@ -83,7 +83,7 @@
                   </select>
 
                 </div>
-           
+
                 <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
               </div>
 
@@ -114,10 +114,10 @@
                   </select>
 
                 </div>
-           
+
                 <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
               </div>
-           
+
 
             </div>
           </form>
@@ -140,15 +140,47 @@
                   <label for="categoryItem">Select OptionValue:</label>
                   <select id="optionValueId" name="optionValueId" [(ngModel)]="skuValue.optionValueId" class="form-control">
                     <option value="">Option Value Name is blank :(-</option>
-                    <option *ngFor="let o of optionValues " value="{{ o.id }}"> {{ o.optionValueName}} </option>
+                    <option *ngFor="let oV of optionValues " value="{{ oV.id }}"> {{ oV.optionValueName}} </option>
 
                   </select>
 
                 </div>
-           
+      
                 <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
               </div>
-           
+
+
+            </div>
+          </form>
+        </div>
+      </li>
+
+
+      <li class="list-items-row">
+        <div data-toggle="collapse" aria-expanded="false" data-target="#list-item-line-Prices">
+          <div class="row">
+            <h5>Price</h5>
+          </div>
+        </div>
+
+        <div class="collapse" id="list-item-line-Prices">
+          <form #f="ngForm" (ngSubmit)="submitProductSku()" novalidate id="add-productSkus-form" action="">
+            <div class="row">
+              <div class="col-md-18 col-md-offset-2">
+                <input name="price" id="price" [(ngModel)]="productSku.price" type="text" class="form-control" placeholder="Price" />
+                <div class="form-group">
+                  <label for="categoryItem">Select SKU Value</label>
+                  <select id="skuValueId" name="skuValueId" [(ngModel)]="productSku.skuValueId" class="form-control">
+                    <option value="">Product Sku Value is blank</option>
+                    <option *ngFor="let s of skuValues " value="{{ s.id }}"> {{ s.skuValueName}} </option>
+
+                  </select>
+
+                </div>
+          
+                <button style="width:30px;" class="btn btn-block btn-secondary theme-light" href="#">Save</button>
+              </div>
+
 
             </div>
           </form>

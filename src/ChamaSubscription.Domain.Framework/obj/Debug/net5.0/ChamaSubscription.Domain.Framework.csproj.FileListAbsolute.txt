@@ -1,6 +1,5 @@
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain.Framework\bin\Debug\net5.0\ChamaSubscription.Domain.Framework.deps.json
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain.Framework\bin\Debug\net5.0\ChamaSubscription.Domain.Framework.dll
-C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain.Framework\bin\Debug\net5.0\ref\ChamaSubscription.Domain.Framework.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain.Framework\bin\Debug\net5.0\ChamaSubscription.Domain.Framework.pdb
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain.Framework\obj\Debug\net5.0\ChamaSubscription.Domain.Framework.csproj.AssemblyReference.cache
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain.Framework\obj\Debug\net5.0\ChamaSubscription.Domain.Framework.GeneratedMSBuildEditorConfig.editorconfig
@@ -10,3 +9,4 @@ C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain.Framew
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain.Framework\obj\Debug\net5.0\ChamaSubscription.Domain.Framework.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain.Framework\obj\Debug\net5.0\ref\ChamaSubscription.Domain.Framework.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain.Framework\obj\Debug\net5.0\ChamaSubscription.Domain.Framework.pdb
+C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Domain.Framework\obj\Debug\net5.0\refint\ChamaSubscription.Domain.Framework.dll

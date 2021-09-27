@@ -8,14 +8,17 @@ import { Observable } from 'rxjs';
 })
 
 export class ProductService {
-
+  //Product APIs
   private readonly compositeProducts = '/api/compositeproducts';
   private readonly singleProducts = '/api/productAttributes';
+
+  // Related APIs
   private readonly categories = '/api/categories';
   private readonly productNames = '/api/products';
   private readonly options = '/api/options';
   private readonly optionValues = '/api/optionValues';
   private readonly skuValues = '/api/skuvalues';
+  private readonly prices = '/api/productAttributes';
 
   constructor(private http: HttpClient) { }
 
@@ -61,6 +64,14 @@ export class ProductService {
   createSkuValues(skuValue) {
     return this.http.post(this.skuValues, skuValue);
 
+  }
+
+  getSkuAttributes() {
+    return this.http.get<any>(this.prices);
+  }
+
+  createSkuAttributes(price) {
+    return this.http.get<any>(this.prices, price);
   }
 
   getSingleProducts() {

@@ -2,7 +2,6 @@ C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructur
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure\bin\Debug\net5.0\ChamaSubscription.Infrastructure.runtimeconfig.json
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure\bin\Debug\net5.0\ChamaSubscription.Infrastructure.runtimeconfig.dev.json
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure\bin\Debug\net5.0\ChamaSubscription.Infrastructure.dll
-C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure\bin\Debug\net5.0\ref\ChamaSubscription.Infrastructure.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure\bin\Debug\net5.0\ChamaSubscription.Infrastructure.pdb
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure\bin\Debug\net5.0\ChamaSubscription.Domain.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure\bin\Debug\net5.0\ChamaSubscription.Domain.Framework.dll
@@ -17,3 +16,5 @@ C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructur
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure\obj\Debug\net5.0\ref\ChamaSubscription.Infrastructure.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure\obj\Debug\net5.0\ChamaSubscription.Infrastructure.pdb
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure\obj\Debug\net5.0\ChamaSubscription.Infrastructure.genruntimeconfig.cache
+C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure\obj\Debug\net5.0\ChamaSubscription.Infrastructure.csproj.CopyComplete
+C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubscription.Infrastructure\obj\Debug\net5.0\refint\ChamaSubscription.Infrastructure.dll

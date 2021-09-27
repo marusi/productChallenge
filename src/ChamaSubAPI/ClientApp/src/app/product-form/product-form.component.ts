@@ -52,6 +52,12 @@ export class ProductFormComponent implements OnInit {
     optionValueId: 0,
   }
 
+  private productSku: any = {
+    id: 0,
+    price: 0,
+    skuValueId: 0,
+  }
+
 
   constructor(
     private productService: ProductService,
@@ -80,15 +86,8 @@ export class ProductFormComponent implements OnInit {
     this.productService.getOptionValues().subscribe(optionValues =>
       this.optionValues = optionValues)
 
-
-
-  //  this.productService.getSuppliers().subscribe(suppliers =>
-   //   this.suppliers = suppliers);
-
-  
-
-
-
+    this.productService.getSkuValues().subscribe(skuValues =>
+      this.skuValues = skuValues)
 
   }
 
@@ -155,6 +154,13 @@ export class ProductFormComponent implements OnInit {
 
   submitSkuValue() {
     this.productService.createSkuValues(this.skuValue)
+      .subscribe(x => {
+        console.log('Sku Value  successfuly created')
+      });
+  }
+
+  submitProductSku() {
+    this.productService.createSkuAttributes(this.productSku)
       .subscribe(x => {
         console.log('Sku Value  successfuly created')
       });

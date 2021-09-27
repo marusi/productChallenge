@@ -34,7 +34,6 @@ C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\bin\Debug\net5.0\Cl
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\bin\Debug\net5.0\ChamaSubAPI.deps.json
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\bin\Debug\net5.0\ChamaSubAPI.runtimeconfig.json
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\bin\Debug\net5.0\ChamaSubAPI.runtimeconfig.dev.json
-C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\bin\Debug\net5.0\ref\ChamaSubAPI.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\bin\Debug\net5.0\ChamaSubAPI.pdb
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\bin\Debug\net5.0\Humanizer.dll
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
@@ -83,3 +82,4 @@ C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\obj\Debug\net5.0\re
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\obj\Debug\net5.0\ChamaSubAPI.pdb
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\obj\Debug\net5.0\ChamaSubAPI.genruntimeconfig.cache
 C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\obj\Debug\net5.0\ChamaSubAPI.csproj.CopyComplete
+C:\Users\Hp\Desktop\dddEven\SubcriptionChama\src\ChamaSubAPI\obj\Debug\net5.0\refint\ChamaSubAPI.dll
