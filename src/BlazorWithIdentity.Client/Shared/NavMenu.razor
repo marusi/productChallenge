@@ -1,0 +1,92 @@
+﻿
+@using Microsoft.Fast.Components.FluentUI
+
+<div class="@NavMenuCssClass navBack " @onclick="ToggleNavMenu">
+<ul class="list-items">
+        <li class="list-items-row">
+            <div class="row">
+                <div class="col-md-24">  <!-- if you want more than one column at a narrow viewport-->
+                   <NavLinkFluentAnchor   Href="/Category" Appearance="Appearance.Stealth">Category</NavLinkFluentAnchor>      <!-- adjust the grid settings appropriately-->
+                </div>
+                 
+               
+            </div>
+        </li>
+      <li class="list-items-row">
+            <div class="row">
+                <div class="col-md-24">  <!-- if you want more than one column at a narrow viewport-->
+                    <NavLinkFluentAnchor Href="/product" Appearance="Appearance.Stealth">Product Name</NavLinkFluentAnchor>
+                </div>
+                
+               
+            </div>
+        </li>
+         <li class="list-items-row">
+            <div class="row">
+                <div class="col-md-24">  <!-- if you want more than one column at a narrow viewport-->
+                    <NavLinkFluentAnchor Href="/option" Appearance="Appearance.Stealth">Option</NavLinkFluentAnchor>
+                </div>
+                
+               
+            </div>
+        </li> 
+         <li class="list-items-row">
+            <div class="row">
+                <div class="col-md-24">  <!-- if you want more than one column at a narrow viewport-->
+                    <NavLinkFluentAnchor Href="/optionvalue" Appearance="Appearance.Stealth">Option Value</NavLinkFluentAnchor>
+                </div>
+                
+               
+            </div>
+        </li> 
+         <li class="list-items-row">
+            <div class="row">
+                <div class="col-md-24">  <!-- if you want more than one column at a narrow viewport-->
+                    <NavLinkFluentAnchor Href="/skuvalue" Appearance="Appearance.Stealth">Sku Value</NavLinkFluentAnchor>
+                </div>
+                
+               
+            </div>
+        </li> 
+
+         <li class="list-items-row">
+            <div class="row">
+                <div class="col-md-24">  <!-- if you want more than one column at a narrow viewport-->
+                    <NavLinkFluentAnchor Href="/productsku" Appearance="Appearance.Stealth">Price</NavLinkFluentAnchor>
+                </div>
+                
+               
+            </div>
+        </li> 
+    </ul>
+
+</div>
+                      
+                     
+            
+
+
+                 
+                
+
+               
+           
+
+
+
+
+
+
+
+
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

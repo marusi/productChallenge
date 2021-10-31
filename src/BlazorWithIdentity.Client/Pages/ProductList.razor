@@ -1,0 +1,119 @@
+﻿@using BlazorWithIdentity.Shared.DTO.ProductSku
+
+<div class="row row-sm">
+  <div class="col-md-12">
+  @*Pagination*@
+  </div>
+  <div class="col-md-12">
+    <div class="putbox-content">
+      <div class="content-title">u</div>
+
+      <div class="combobox">
+        @*Querry*@
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+  
+
+
+
+
+
+
+
+<ol class="list-items">
+  <li class="list-items-row">
+
+  </li>
+
+
+
+  @if (productSkus == null)
+{
+   <li class="list-items-row">
+       <div class="entity-list ">
+        <div class="entity-list-item "  >
+          <div class="item-icon">
+            <span class="glyph glyph-warning"></span>
+          </div>
+           <div class="item-content-secondary">
+              <div class="content-text-tertiary "> <span class="label label-danger">Nothing here</span>  </div>
+          </div>
+          </div>
+          </div>
+  </li>
+} else
+{
+    @foreach (var item in productSkus)
+    {
+        <li class="list-items-row" >
+    <div class="row">
+      <div class="entity-list ">
+        <div class="entity-list-item "  >
+          <div class="item-icon">
+            <span class="glyph glyph-chevron-right"></span>
+          </div>
+          <div class="item-content-secondary">
+               @item.SkuValue.SkuValueName
+              <div class="content-text-tertiary "> <span class="label label-warning">@item.SkuValue.OptionValue.Option.Product.ProductCategory.Name</span>  </div>
+          </div>
+
+          <div class="item-content-primary">
+
+            <div class="content-text-primary ">@item.SkuValue.OptionValue.Option.Product.ProductName </div>
+            <div class="content-text-secondary">@item.SkuValue.OptionValue.OptionValueName - KES @item.Price </div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </li>
+    }
+}
+
+ 
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@code {
+
+     ProductSkuDTO productSkuValueDTO { get; set; } = new ProductSkuDTO();
+  //  ProductCategoryDTO productCategoryDTO { get; set; } = new ProductCategoryDTO();
+   
+     [Inject]
+    public IProductSkuDataService ProductSkuDataService { get; set; }
+
+    @functions {
+
+
+        private ProductSkuDTO[] productSkus { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            productSkus = await ProductSkuDataService.GetProductSkus();
+              StateHasChanged();
+             await OnInitializedAsync();
+        }            
+
+        }
+}

@@ -1,0 +1,116 @@
+﻿@page "/skuvaluedata/{Id:int}"
+@attribute [Authorize]
+@using BlazorWithIdentity.Shared
+@inject HttpClient Http
+
+@using BlazorWithIdentity.Shared.DTO.OptionValue
+@using BlazorWithIdentity.Shared.DTO.SkuValue
+
+
+<div class="row row-sm">
+<div class="container">
+    <FluentCard style="height:25%">
+  
+ <EditForm class="form-category" OnValidSubmit="OnSubmitSkuValue" Model="saveSkuValueDTO">
+         
+     <div class="col-md-2">
+          <NavLinkFluentAnchor  Href="@($"optionvalue")" Appearance="Appearance.Stealth"><span style="color:green;" class="glyph glyph-back"></span></NavLinkFluentAnchor> 
+      </div>
+         
+      <div class="col-md-6">
+
+          @if(optionValues == null) 
+          {
+              <p><a href="/optionvalue">Insert</a> a new option value </p>
+          } else {
+             
+               <InputSelect  class="form-control" id="options" @bind-Value="saveSkuValueDTO.OptionValueId">
+                                                  
+                                                    @foreach (var item in optionValues)
+                                                    {
+                                                       
+                                                        <option value="@item.Id">@item.OptionValueName</option>
+                                                    }
+                                                </InputSelect>
+                                                 <p>Option Value</p>
+           }
+
+                </div>
+                <div class="col-md-8">
+
+                    <FluentTextField id="inputCategory"  @bind-Value="saveSkuValueDTO.SkuValueName"  placeholder="@skuValueItem.SkuValueName"  ></FluentTextField>
+                    <ValidationMessage class="text-danger" For="@(() => saveSkuValueDTO.SkuValueName)" />
+
+
+                </div>
+
+                <div class="col-md-8">
+                    <FluentButton type="submit" Appearance="Appearance.Accent">Submit</FluentButton>
+                    <label class="text-danger">@error</label> 
+
+                </div>
+
+
+
+            </EditForm>
+        </FluentCard>
+    </div>
+
+</div>
+
+
+
+
+
+
+@code { [Parameter]
+    public int Id { get; set; }
+    string error { get; set; }
+
+
+    SkuValueDTO skuValueItem { get; set; } = new SkuValueDTO();
+    SaveSkuValueDTO saveSkuValueDTO { get; set; } = new SaveSkuValueDTO();
+
+
+
+
+
+    [Inject]
+    public IOptionValueDataService OptionValueDataService { get; set; }
+    [Inject]
+    public ISkuValueDataService SkuValueDataService { get; set; }
+
+    async Task OnSubmitSkuValue()
+    {
+        error = null;
+        try
+        {
+            await SkuValueDataService.UpdateSkuValue(Id, saveSkuValueDTO);
+            toastService.ShowToast($"{saveSkuValueDTO.SkuValueName} added Succesfuly", ToastLevel.Success);
+             StateHasChanged();
+               await OnInitializedAsync();
+            navigationManager.NavigateTo("/skuvalue");
+
+
+
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+            toastService.ShowToast($"{saveSkuValueDTO.SkuValueName} failed to add", ToastLevel.Error);
+        }
+    }
+    @functions {
+       private OptionValueDTO[] optionValues { get; set; }
+      protected override async Task OnInitializedAsync()
+    {
+          optionValues = await OptionValueDataService.GetOptionValues();
+            skuValueItem = await SkuValueDataService.GetSkuValueById(Id);
+            
+          // dataList = await CategoryDataService.GetCategories();
+            // toastService.ShowToast($"Items loaded succesfuly", ToastLevel.Info);
+    }
+
+      
+    }
+}

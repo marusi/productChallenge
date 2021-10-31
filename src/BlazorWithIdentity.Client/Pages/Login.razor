@@ -1,0 +1,78 @@
+﻿@page "/login"
+@layout LoginLayout
+@inject NavigationManager navigationManager
+@inject IdentityAuthenticationStateProvider authStateProvider
+@using Microsoft.Fast.Components.FluentUI
+
+
+
+<div class="container m-t-xs">
+  <div class="row">
+    <h1 class="type-h1">Login</h1>
+
+    <div class="col-md-10">
+      <h1 class="type-h3 color-type-accent">Jump right in</h1>
+      
+    </div>
+    <div class="col-md-14">
+      <EditForm class="form-signin" OnValidSubmit="OnSubmit" Model="loginParameters">
+         
+ <FluentCard style="width:60%;height:100%">
+
+<FluentTextField id="inputUsername"  @bind-Value="loginParameters.UserName"  placeholder="Username"  ></FluentTextField>
+ <ValidationMessage class="text-danger" For="@(() => loginParameters.UserName)" />
+ <br />
+<FluentTextField id="inputPassword" placeholder="Password"   TextFieldType="TextFieldType.Password" @bind-Value="loginParameters.Password"></FluentTextField>
+<ValidationMessage class="text-danger" For="@(() => loginParameters.Password)" />
+    <br />
+   <FluentButton type="submit" Appearance="Appearance.Accent">Sign in</FluentButton>
+     <label class="text-danger">@error</label>
+</FluentCard>
+ <FluentCard style="width:60%;height:50%">
+   <h6 >New to Chama!<NavLink Appearance="Appearance.Outline" href="register">Create account </NavLink></h6>
+    </FluentCard>
+
+    
+
+
+ 
+</EditForm>
+   
+    </div>
+  </div>
+</div>
+  
+     
+   
+    
+  
+
+
+   
+
+
+  
+
+
+
+@code{
+    LoginParameters loginParameters { get; set; } = new LoginParameters();
+    string error { get; set; }
+
+    async Task OnSubmit()
+    {
+        error = null;
+        try
+        {
+            await authStateProvider.Login(loginParameters);
+             toastService.ShowToast($"Welcome ", ToastLevel.Success);
+            navigationManager.NavigateTo("");
+            
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+            toastService.ShowToast($"Login Unsuccesful", ToastLevel.Error);
+        }
+    }
+}

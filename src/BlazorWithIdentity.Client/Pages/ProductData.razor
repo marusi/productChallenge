@@ -1,0 +1,123 @@
+﻿@page "/productdata/{Id:int}"
+@attribute [Authorize]
+@using BlazorWithIdentity.Shared
+@inject HttpClient Http
+@using BlazorWithIdentity.Shared.DTO.Category
+@using BlazorWithIdentity.Shared.DTO.Product
+
+
+<div class="row row-sm">
+<div class="container">
+      <h6>Edit Product</h6>
+    <FluentCard style="height:25%">
+  
+ <EditForm class="form-category" OnValidSubmit="OnSubmitProduct" Model="productItem">
+     
+     <div class="col-md-2">
+          <NavLinkFluentAnchor  Href="@($"product")" Appearance="Appearance.Stealth"><span style="color:green;" class="glyph glyph-back"></span></NavLinkFluentAnchor> 
+      </div>
+         
+      <div class="col-md-6">
+
+          @if(categories == null) 
+          {
+              <p><a href="/category">Insert</a> a new category </p>
+          } else {
+             
+               <InputSelect  class="form-control" id="category" @bind-Value="saveProductDTO.ProductCategoryId">
+                                                  
+                                                    @foreach (var item in categories)
+                                                    {
+                                                       
+                                                        <option value="@item.Id">@item.Name</option>
+                                                    }
+                                                </InputSelect>
+                                                 <p>Category</p>
+           }
+
+                </div>
+                <div class="col-md-8">
+
+                    <FluentTextField id="inputCategory"  @bind-Value="saveProductDTO.ProductName"  placeholder="@productItem.ProductName"  ></FluentTextField>
+                    <ValidationMessage class="text-danger" For="@(() => saveProductDTO.ProductName)" />
+
+
+                </div>
+
+                <div class="col-md-8">
+                    <FluentButton type="submit" Appearance="Appearance.Accent">Submit</FluentButton>
+                    <label class="text-danger">@error</label> 
+
+                </div>
+
+
+
+            </EditForm>
+        </FluentCard>
+    </div>
+
+</div>
+
+
+
+
+
+
+@code {
+    
+    [Parameter]
+    public int Id { get; set; }
+    string error { get; set; }
+
+
+    ProductDTO productItem { get; set; } = new ProductDTO();
+    SaveProductDTO saveProductDTO { get; set; } = new SaveProductDTO();
+
+
+
+
+
+    [Inject]
+    public ICategoryDataService CategoryDataService { get; set; }
+    [Inject]
+    public IProductDataService ProductDataService { get; set; }
+
+    async Task OnSubmitProduct()
+    {
+        error = null;
+        try
+        {
+            await ProductDataService.UpdateProduct(Id, saveProductDTO);
+            toastService.ShowToast($"{saveProductDTO.ProductName} added Succesfuly", ToastLevel.Success);
+            //  StateHasChanged();
+            //    await OnInitializedAsync();
+            navigationManager.NavigateTo("/product");
+
+
+
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+             toastService.ShowToast($"{saveProductDTO.ProductName} failed to add", ToastLevel.Error);
+        }
+    }
+    @functions {
+
+       
+       private ProductCategoryDTO[] categories { get; set; }
+       
+      
+      protected override async Task OnInitializedAsync()
+    {
+          
+          
+            
+          categories = await CategoryDataService.GetCategories();
+            productItem = await ProductDataService.GetProductById(Id);
+            // toastService.ShowToast($"Items loaded succesfuly", ToastLevel.Info);
+    }
+
+      
+    }
+}

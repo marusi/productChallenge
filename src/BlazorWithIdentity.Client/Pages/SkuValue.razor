@@ -1,0 +1,185 @@
+﻿@page "/skuvalue"
+
+@attribute [Authorize]
+
+@inject IdentityAuthenticationStateProvider authStateProvider
+
+@using System.Net.Http
+@using System.Net.Http.Json
+@using System.Threading.Tasks
+@inject HttpClient Http
+@using BlazorWithIdentity.Shared.DTO.Option
+@using BlazorWithIdentity.Shared.DTO.OptionValue
+@using BlazorWithIdentity.Shared.DTO.SkuValue
+
+
+ <div class="row">
+   <div class="container">
+   <h6>Sku Value</h6>
+   <div class="col-md-12">
+    <FluentCard  style="height:50%">  
+    
+   
+      @if (skuValues == null)
+         {
+            
+             <ol class="list-items">
+        <li class="list-items-row">
+            <div class="row">
+                <div class="col-md-24"><h6>Nothing to display</h6></div>
+                </div> </li></ol>
+               
+          }
+        
+         else
+         {
+            
+                   <ol class="list-items">
+                     <li class="list-items-row">
+                            <div class="row">
+                              <EditForm class="form-category" OnValidSubmit="OnSubmit" Model="saveSkuValueDTO">
+                                   <div class="col-md-24">
+                                      <div class="col-md-12">
+                                        <h6>Choose Option Value</h6>
+                                               <InputSelect  class="form-control" id="skuValue" @bind-Value="saveSkuValueDTO.OptionValueId">
+                                                  
+                                                    @foreach (var item in optionValues)
+                                                    {
+                                                        <option value="@item.Id">@item.OptionValueName</option>
+                                                    }
+                                                </InputSelect>
+                                              <br>
+                                              </div>
+                                               <div class="col-md-12"></div>
+                                     
+                                  </div> 
+                                  
+                                  <div class="col-md-12">
+                                                   
+                                                        <FluentTextField id="inputCategory"  @bind-Value="saveSkuValueDTO.SkuValueName"  placeholder="New Sku Value"  ></FluentTextField>
+                                                            <ValidationMessage class="text-danger" For="@(() => saveSkuValueDTO.SkuValueName)" />
+
+                                                     </div>
+                                                     <div class="col-md-12">
+                                                        <FluentButton type="submit" Appearance="Appearance.Accent">Submit</FluentButton>
+                                                    
+                                                      <label class="text-danger">@error</label> 
+                                                 </div>
+                                         
+                                   </EditForm>
+                           </div>
+                     </li>
+                      @foreach (var item in skuValues)
+                        {
+                                <li class="list-items-row">
+                                    <div class="row">
+                                <div class="col-md-16">
+                                    <ol class="breadcrumb">
+                                      <li><a href="skuoptiondata/@item.OptionValue.Id"> @item.OptionValue.OptionValueName</a></li>
+                                      <li class="active"> @item.SkuValueName</li>
+                                    </ol>
+
+                                </div>
+               
+                <div class="col-md-4">
+                   <NavLinkFluentAnchor  Href="@($"skuvaluedata/{item.Id}")" Appearance="Appearance.Stealth"><span style="color:green;" class="glyph glyph-edit"></span></NavLinkFluentAnchor> 
+                 
+                </div>
+                 <div class="col-md-4">
+                    <FluentButton type="submit"   @onclick="(() => DeleteSkuValue(item.Id))" Appearance="Appearance.Stealth"><span style="color:red;" class="glyph glyph-delete"></span></FluentButton>
+                </div>
+            </div>
+        </li>
+        }
+                     </ol>
+
+}
+             </FluentCard>
+
+     </div>
+     <div class="col-md-12"> </div>
+ </div>
+ </div>
+
+
+@code{
+
+    // private SuccessNotification _notification;
+
+     [Parameter]
+    public int Id { get; set; }
+    SaveSkuValueDTO saveSkuValueDTO { get; set; } = new SaveSkuValueDTO();
+    string error { get; set; }
+
+    SkuValueDTO skuValueDTO { get; set; } = new SkuValueDTO();
+  //  ProductCategoryDTO productCategoryDTO { get; set; } = new ProductCategoryDTO();
+   
+     [Inject]
+      public IOptionValueDataService OptionValueDataService { get; set; }
+
+      [Inject]
+     public ISkuValueDataService SkuValueDataService { get; set; }
+
+    async Task OnSubmit()
+    {
+        error = null;
+        try
+        {
+            await SkuValueDataService.CreateSkuValue(saveSkuValueDTO);
+            toastService.ShowToast($"{saveSkuValueDTO.SkuValueName} added Succesfuly", ToastLevel.Success);
+            StateHasChanged();
+             await OnInitializedAsync();
+            navigationManager.NavigateTo("/skuvalue");
+            
+           
+
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
+  
+
+  
+
+  @functions {
+
+
+        private OptionValueDTO[] optionValues { get; set; }
+        private SkuValueDTO[] skuValues { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+       optionValues = await OptionValueDataService.GetOptionValues();
+       skuValues = await SkuValueDataService.GetSkuValues();
+
+
+      // toastService.ShowToast($"Items loaded succesfuly", ToastLevel.Info);
+    }
+
+    protected async Task DeleteSkuValue(int Id)
+        {
+          await SkuValueDataService.DeleteSkuValue(Id);
+          toastService.ShowToast($"Item deleted succesfuly", ToastLevel.Success);
+            StateHasChanged();
+            await OnInitializedAsync();
+            //  StatusClass = "alert-success";
+          //  Message = "Deleted successfully";
+
+           // Saved = true;
+        }
+
+ 
+  }
+
+
+     
+
+
+
+
+}
+
+ 

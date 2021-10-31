@@ -1,0 +1,46 @@
+﻿@using BlazorWithIdentity.Shared.DTO.CompositeProduct
+
+
+<h3>Composite Product List</h3>
+@if (compositeProducts == null)
+{
+  <FluentHorizontalScroll class="right-gradient" Speed="600" Easing="ease-in-out" >
+    <FluentCard style="width:100px;height:240px">List is Empty</FluentCard>
+   
+  
+</FluentHorizontalScroll>
+} else
+{ 
+    @foreach(var item in compositeProducts){
+        <h1>@item.Id</h1>
+    }
+    
+}
+
+
+
+
+@code {
+
+     CompositeProductDTO compositeProductDTO { get; set; } = new CompositeProductDTO();
+  //  ProductCategoryDTO productCategoryDTO { get; set; } = new ProductCategoryDTO();
+   
+     [Inject]
+    public ICompositeProductDataService CompositeProductDataService { get; set; }
+
+    @functions {
+
+
+        private CompositeProductDTO[] compositeProducts { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            compositeProducts  = await CompositeProductDataService.GetCompositeProducts();
+              StateHasChanged();
+             await OnInitializedAsync();
+        }
+            
+
+        }
+}
+

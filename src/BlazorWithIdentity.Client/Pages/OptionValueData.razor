@@ -1,0 +1,115 @@
+﻿@page "/optionvaluedata/{Id:int}"
+@attribute [Authorize]
+@using BlazorWithIdentity.Shared
+@inject HttpClient Http
+@using BlazorWithIdentity.Shared.DTO.Option
+@using BlazorWithIdentity.Shared.DTO.OptionValue
+
+
+<div class="row row-sm">
+<div class="container">
+    <FluentCard style="height:25%">
+  
+ <EditForm class="form-category" OnValidSubmit="OnSubmitOptionValue" Model="saveOptionValueDTO">
+         
+     <div class="col-md-2">
+          <NavLinkFluentAnchor  Href="@($"option")" Appearance="Appearance.Stealth"><span style="color:green;" class="glyph glyph-back"></span></NavLinkFluentAnchor> 
+      </div>
+         
+      <div class="col-md-6">
+
+          @if(options == null) 
+          {
+              <p><a href="/options">Insert</a> a new category </p>
+          } else {
+             
+               <InputSelect  class="form-control" id="options" @bind-Value="saveOptionValueDTO.OptionId">
+                                                  
+                                                    @foreach (var item in options)
+                                                    {
+                                                       
+                                                        <option value="@item.Id">@item.OptionName</option>
+                                                    }
+                                                </InputSelect>
+                                                 <p>Option</p>
+           }
+
+                </div>
+                <div class="col-md-8">
+
+                    <FluentTextField id="inputCategory"  @bind-Value="saveOptionValueDTO.OptionValueName"  placeholder="@optionValueItem.OptionValueName"  ></FluentTextField>
+                    <ValidationMessage class="text-danger" For="@(() => saveOptionValueDTO.OptionValueName)" />
+
+
+                </div>
+
+                <div class="col-md-8">
+                    <FluentButton type="submit" Appearance="Appearance.Accent">Submit</FluentButton>
+                    <label class="text-danger">@error</label> 
+
+                </div>
+
+
+
+            </EditForm>
+        </FluentCard>
+    </div>
+
+</div>
+
+
+
+
+
+
+@code { [Parameter]
+    public int Id { get; set; }
+    string error { get; set; }
+
+
+    OptionValueDTO optionValueItem { get; set; } = new OptionValueDTO();
+    SaveOptionValueDTO saveOptionValueDTO { get; set; } = new SaveOptionValueDTO();
+
+
+
+
+
+    [Inject]
+    public IOptionValueDataService OptionValueDataService { get; set; }
+    [Inject]
+    public IOptionDataService OptionDataService { get; set; }
+
+    async Task OnSubmitOptionValue()
+    {
+        error = null;
+        try
+        {
+            await OptionValueDataService.UpdateOptionValue(Id, saveOptionValueDTO);
+            toastService.ShowToast($"{saveOptionValueDTO.OptionValueName} added Succesfuly", ToastLevel.Success);
+             StateHasChanged();
+               await OnInitializedAsync();
+            navigationManager.NavigateTo("/optionvalue");
+
+
+
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+            toastService.ShowToast($"{saveOptionValueDTO.OptionValueName} failed to add", ToastLevel.Error);
+        }
+    }
+    @functions {
+       private OptionDTO[] options { get; set; }
+      protected override async Task OnInitializedAsync()
+    {
+          options = await OptionDataService.GetOptions();
+            optionValueItem = await OptionValueDataService.GetOptionValueById(Id);
+            
+          // dataList = await CategoryDataService.GetCategories();
+            // toastService.ShowToast($"Items loaded succesfuly", ToastLevel.Info);
+    }
+
+      
+    }
+}

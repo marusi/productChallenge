@@ -1,0 +1,51 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager navigationManager
+@inject IdentityAuthenticationStateProvider authStateProvider
+@using BlazorWithIdentity.Client.Pages
+@using Microsoft.Fast.Components.FluentUI
+
+    <AuthorizeView>
+        <Authorized>
+            @*Show the menu and the rest of the body*@
+     <div class="row-sm">
+             <FluentDesignSystemProvider  fill-color="#2A1B3D" style="padding:10px;min-width:100%">
+                  <FluentToolbar id="toolbar-fluent-components-main" style="width:100%" >
+                        <NavLinkFluentAnchor Href="/" Appearance="Appearance.Outline">Home</NavLinkFluentAnchor>
+                           <h5 slot="end">Hi, @context.User.Identity.Name  <span class="glyph glyph-undo" data-toggle="tooltip" title="Log out"  @onclick="@LogoutClick" slot="end">Log out</span> </h5>   
+                      </FluentToolbar>
+     </FluentDesignSystemProvider>
+     </div>
+      <div class="row">
+           <Toast></Toast>
+      <div  class="col-md-4 ">
+      <NavMenu />
+        </div>
+        <div class="col-md-10">
+             @Body
+        </div>
+        <div class="col-md-8">
+            <AllProduct />   
+        </div>
+
+        </div>
+      
+      <Footer/>
+
+        </Authorized>
+        <NotAuthorized>
+            @*Just render the body so that RedirectToLogin works*@
+            @Body
+        </NotAuthorized>
+    </AuthorizeView>
+
+
+
+@code{
+
+    async Task LogoutClick()
+    {
+        await authStateProvider.Logout();
+        toastService.ShowToast("Logged out!", ToastLevel.Info);
+        navigationManager.NavigateTo("/login");
+    }
+}

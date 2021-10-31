@@ -1,0 +1,168 @@
+﻿@page "/productskudata/{Id:int}"
+
+@attribute [Authorize]
+
+@inject IdentityAuthenticationStateProvider authStateProvider
+
+@using System.Net.Http
+@using System.Net.Http.Json
+@using System.Threading.Tasks
+@using BlazorWithIdentity.Shared.DTO.ProductSku
+@using BlazorWithIdentity.Shared.DTO.SkuValue
+@inject HttpClient Http
+
+
+<div class="row">
+ <div class="container">
+   <h6>Price </h6>
+   <div class="col-md-12">
+    <FluentCard  style="height:50%">  
+    
+   
+      @if (productSkus == null)
+         {
+            
+             <ol class="list-items">
+        <li class="list-items-row">
+            <div class="row">
+                <div class="col-md-24"><h6>Nothing to display</h6></div>
+                </div> </li></ol>
+               
+          }
+        
+         else
+         {
+            
+                   <ol class="list-items">
+                     <li class="list-items-row">
+                            <div class="row">
+                              <EditForm class="form-category" OnValidSubmit="OnSubmit" Model="saveProductSkuDTO">
+                                  <div class="col-md-24">
+                                      <div class="col-md-12">
+                                          <p>Choose Category</p>
+                                               <InputSelect  class="form-control" id="optionValue" @bind-Value="saveProductSkuDTO.SkuValueId">
+                                                  
+                                                    @foreach (var item in skuValues)
+                                                    {
+                                                       
+                                                      
+                                                     <option value="@item.Id">
+                                                         @item.OptionValue.Option.Product.ProductName
+                                                         @item.OptionValue.OptionValueName  @item.SkuValueName 
+                                                         
+                                                         </option>
+
+                                                     
+                                                }
+                                                </InputSelect>
+                                               
+                                                <br/>
+                                      </div>
+                                      <div class="col-md-12"></div>
+                                     
+                                  </div> 
+                                  
+                                  <div class="col-md-12">
+                                       
+                                              
+                                                   
+                                                        <input id="inputCategory" type="number" class="form-control"  @bind="saveProductSkuDTO.Price"  placeholder="New Price"  />
+                                                            <ValidationMessage class="text-danger" For="@(() => saveProductSkuDTO.Price)" />
+
+                                                     </div>
+                                                     <div class="col-md-12">
+                                                        <FluentButton type="submit" Appearance="Appearance.Accent">Submit</FluentButton>
+                                                    
+                                                      <label class="text-danger">@error</label> 
+                                                 </div>
+                                         
+                                   </EditForm>
+                           </div>
+                     </li>
+                   
+                                <li class="list-items-row">
+                                   
+        </li>
+       
+                     </ol>
+
+}
+             </FluentCard>
+
+     </div>
+     <div class="col-md-12"> </div>
+ </div>
+ </div>
+
+
+@code{
+
+    // private SuccessNotification _notification;
+
+     [Parameter]
+    public int Id { get; set; }
+    SaveProductSkuDTO saveProductSkuDTO { get; set; } = new SaveProductSkuDTO();
+    string error { get; set; }
+
+   
+  //  ProductCategoryDTO productCategoryDTO { get; set; } = new ProductCategoryDTO();
+   
+     [Inject]
+    public IProductSkuDataService ProductSkuDataService { get; set; }
+
+      [Inject]
+    public ISkuValueDataService SkuValueDataService { get; set; }
+
+    async Task OnSubmit()
+    {
+        error = null;
+        try
+        {
+            await ProductSkuDataService.UpdateProductSku(Id, saveProductSkuDTO);
+            toastService.ShowToast($"{saveProductSkuDTO.Price} added Succesfuly", ToastLevel.Success);
+            StateHasChanged();
+             await OnInitializedAsync();
+            navigationManager.NavigateTo("/productsku");
+            
+           
+
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
+  
+
+  
+
+  @functions {
+
+
+        private ProductSkuDTO[] productSkus { get; set; }
+        private SkuValueDTO[] skuValues { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+       productSkus = await ProductSkuDataService.GetProductSkus();
+       skuValues = await SkuValueDataService.GetSkuValues();
+
+
+      // toastService.ShowToast($"Items loaded succesfuly", ToastLevel.Info);
+    }
+
+ 
+
+ 
+  }
+
+
+     
+
+
+
+
+}
+
+ 

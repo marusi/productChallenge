@@ -1,0 +1,184 @@
+﻿@page "/option"
+
+@attribute [Authorize]
+
+@inject IdentityAuthenticationStateProvider authStateProvider
+
+@using System.Net.Http
+@using System.Net.Http.Json
+@using System.Threading.Tasks
+@inject HttpClient Http
+@using BlazorWithIdentity.Shared.DTO.Option
+@using BlazorWithIdentity.Shared.DTO.Product
+
+
+ <div class="row">
+  <div class="container">
+   <h6>Option</h6>
+   <div class="col-md-12">
+    <FluentCard  style="height:50%">  
+    
+   
+      @if (options == null)
+         {
+            
+             <ol class="list-items">
+        <li class="list-items-row">
+            <div class="row">
+                <div class="col-md-24"><h6>Nothing to display</h6></div>
+                </div> </li></ol>
+               
+          }
+        
+         else
+         {
+            
+                   <ol class="list-items">
+                     <li class="list-items-row">
+                            <div class="row">
+                              <EditForm class="form-category" OnValidSubmit="OnSubmit" Model="saveOptionDTO">
+                                   <div class="col-md-24">
+                                      <div class="col-md-12">
+                                        <h6>Choose Product</h6>
+                                               <InputSelect  class="form-control" id="product" @bind-Value="saveOptionDTO.ProductId">
+                                                  
+                                                    @foreach (var item in products)
+                                                    {
+                                                        <option value="@item.Id">@item.ProductName</option>
+                                                    }
+                                                </InputSelect>
+                                              <br/>
+                                              </div>
+                                              <div class="col-md-12"></div>
+                                     
+                                  </div> 
+                                  
+                                  <div class="col-md-12">
+                                                   
+                                                        <FluentTextField id="inputCategory"  @bind-Value="saveOptionDTO.OptionName"  placeholder="New Option"  ></FluentTextField>
+                                                            <ValidationMessage class="text-danger" For="@(() => saveOptionDTO.OptionName)" />
+
+                                                     </div>
+                                                     <div class="col-md-12">
+                                                        <FluentButton type="submit" Appearance="Appearance.Accent">Submit</FluentButton>
+                                                    
+                                                      <label class="text-danger">@error</label> 
+                                                 </div>
+                                         
+                                   </EditForm>
+                           </div>
+                     </li>
+                      @foreach (var item in options)
+                        {
+                                <li class="list-items-row">
+                                    <div class="row">
+                                <div class="col-md-16">
+                                    <ol class="breadcrumb">
+                                      <li><a href="productdata/@item.Product.Id"> @item.Product.ProductName</a></li>
+                                      <li class="active"> @item.OptionName</li>
+                                    </ol>
+
+                                </div>
+               
+                <div class="col-md-4">
+                   <NavLinkFluentAnchor  Href="@($"optiondata/{item.Id}")" Appearance="Appearance.Stealth"><span style="color:green;" class="glyph glyph-edit"></span></NavLinkFluentAnchor> 
+                 
+                </div>
+                 <div class="col-md-4">
+                    <FluentButton type="submit"   @onclick="(() => DeleteOption(item.Id))" Appearance="Appearance.Stealth"><span style="color:red;" class="glyph glyph-delete"></span></FluentButton>
+                </div>
+            </div>
+        </li>
+        }
+                     </ol>
+
+}
+             </FluentCard>
+
+     </div>
+     <div class="col-md-12"> </div>
+ </div>
+ </div>
+
+
+@code{
+
+    // private SuccessNotification _notification;
+
+     [Parameter]
+    public int Id { get; set; }
+    SaveOptionDTO saveOptionDTO { get; set; } = new SaveOptionDTO();
+    string error { get; set; }
+
+    OptionDTO optionDTO { get; set; } = new OptionDTO();
+  //  ProductCategoryDTO productCategoryDTO { get; set; } = new ProductCategoryDTO();
+   
+     [Inject]
+    public IOptionDataService OptionDataService { get; set; }
+
+      [Inject]
+    public IProductDataService ProductDataService { get; set; }
+
+    async Task OnSubmit()
+    {
+        error = null;
+        try
+        {
+            await OptionDataService.CreateOption(saveOptionDTO);
+            toastService.ShowToast($"{saveOptionDTO.OptionName} added Succesfuly", ToastLevel.Success);
+            StateHasChanged();
+             await OnInitializedAsync();
+            navigationManager.NavigateTo("/option");
+            
+           
+
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
+  
+
+  
+
+  @functions {
+
+
+        private OptionDTO[] options { get; set; }
+        private ProductDTO[] products { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+       products = await ProductDataService.GetProducts();
+       options = await OptionDataService.GetOptions();
+
+
+      // toastService.ShowToast($"Items loaded succesfuly", ToastLevel.Info);
+    }
+
+    protected async Task DeleteOption(int Id)
+        {
+          await OptionDataService.DeleteOption(Id);
+          toastService.ShowToast($"Item deleted succesfuly", ToastLevel.Success);
+            StateHasChanged();
+            await OnInitializedAsync();
+            //  StatusClass = "alert-success";
+          //  Message = "Deleted successfully";
+
+           // Saved = true;
+        }
+
+ 
+  }
+
+
+     
+
+
+
+
+}
+
+ 

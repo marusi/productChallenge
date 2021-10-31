@@ -1,0 +1,81 @@
+﻿@page "/categorydata/{Id:int}"
+@attribute [Authorize]
+@using BlazorWithIdentity.Shared
+@inject HttpClient Http
+@using BlazorWithIdentity.Shared.DTO.Category
+
+<div class="row row-sm">
+<div class="container">
+    <h6>Edit Category</h6>
+
+    <FluentCard style="height:25%">
+ <EditForm class="form-category" OnValidSubmit="OnSubmitCategory" Model="categoryItem">
+      <div class="col-md-2">
+          <NavLinkFluentAnchor  Href="@($"category")" Appearance="Appearance.Stealth"><span style="color:green;" class="glyph glyph-back"></span></NavLinkFluentAnchor> 
+      </div>
+         
+      <div class="col-md-10">
+       
+       <FluentTextField id="inputCategory"  @bind-Value="categoryItem.Name"  placeholder="@categoryItem.Name"  ></FluentTextField>
+         <ValidationMessage class="text-danger" For="@(() => categoryItem.Name)" />
+       </div>
+
+        <div class="col-md-12">
+        <FluentButton type="submit" Appearance="Appearance.Accent">Submit</FluentButton>
+            <label class="text-danger">@error</label> 
+    
+        </div>
+
+
+ 
+        </EditForm>
+        </FluentCard>
+</div>
+
+</div>
+
+
+
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+      string error { get; set; }
+
+   ProductCategoryDTO categoryItem { get; set; } = new ProductCategoryDTO();
+    SaveProductCategoryDTO saveProductCategoryDTO { get; set; } = new SaveProductCategoryDTO();
+   
+   
+     [Inject]
+    public ICategoryDataService CategoryDataService { get; set; }
+
+      async Task OnSubmitCategory()
+    {
+        error = null;
+        try
+        {
+           await CategoryDataService.UpdateCategory(Id, categoryItem);
+            toastService.ShowToast($"{categoryItem.Name} added Succesfuly", ToastLevel.Success);
+         //  StateHasChanged();
+         //    await OnInitializedAsync();
+            navigationManager.NavigateTo("/category");
+            
+           
+
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
+  
+
+      protected override async Task OnInitializedAsync()
+    {
+       categoryItem = await CategoryDataService.GetCategoryById(Id);
+
+      // toastService.ShowToast($"Items loaded succesfuly", ToastLevel.Info);
+    }
+}

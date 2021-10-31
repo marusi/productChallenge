@@ -1,0 +1,74 @@
+﻿@page "/register"
+@layout LoginLayout
+@inject NavigationManager navigationManager
+@inject IdentityAuthenticationStateProvider authStateProvider
+
+@using Microsoft.Fast.Components.FluentUI
+
+<div class="container m-t-xs">
+  <div class="row">
+    <h1 class="type-h1">Register</h1>
+
+    <div class="col-md-10">
+      <h1 class="type-h3 color-type-accent">We will never forget</h1>
+      
+    </div>
+    <div class="col-md-14">
+
+<EditForm class="form-signin" OnValidSubmit="OnSubmit" Model="registerParameters">
+     <FluentCard style="width:60%;height:100%">
+    <DataAnnotationsValidator />
+  
+
+   
+    <FluentTextField id="inputUsername"  placeholder="Username"  @bind-Value="@registerParameters.UserName" />
+    <ValidationMessage class="text-danger" For="@(() => registerParameters.UserName)" />
+
+      <br />
+    <FluentTextField type="password" id="inputPassword"  placeholder="Password" @bind-Value="@registerParameters.Password" />
+    <ValidationMessage class="text-danger" For="@(() => registerParameters.Password)" />
+
+     <br />
+    <FluentTextField type="password" id="inputPasswordConfirm"  placeholder="Password Confirmation" @bind-Value="@registerParameters.PasswordConfirm" />
+    <ValidationMessage class="text-danger" For="@(() => registerParameters.PasswordConfirm)" />
+        <br />
+    <FluentButton  Appearance="Appearance.Accent" type="submit">Create account</FluentButton>
+        
+    <label class="text-danger">@error</label>
+  
+    </FluentCard>
+     <FluentCard style="width:60%;height:50%">
+     <h6 > Already a member! <NavLink Appearance="Appearance.Outline" href="login">
+        Login  </NavLink></h6>
+   
+    </FluentCard>
+
+ 
+</EditForm>
+
+ </div>
+    </div>
+    </div>
+  
+
+@functions{
+
+    RegisterParameters registerParameters { get; set; } = new RegisterParameters();
+    string error { get; set; }
+
+    async Task OnSubmit()
+    {
+        error = null;
+        try
+        {
+            await authStateProvider.Register(registerParameters);
+            toastService.ShowToast($"Welcome ", ToastLevel.Success);
+            navigationManager.NavigateTo("");
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+             toastService.ShowToast($"Registration Unsuccesful", ToastLevel.Error);
+        }
+    }
+}

@@ -1,0 +1,103 @@
+﻿@page "/optiondata/{Id:int}"
+@attribute [Authorize]
+@using BlazorWithIdentity.Shared
+@inject HttpClient Http
+@using BlazorWithIdentity.Shared.DTO.Option
+@using BlazorWithIdentity.Shared.DTO.Product
+
+
+
+
+
+
+<div class="row row-sm">
+<div class="container">
+    <FluentCard style="height:25%">
+  
+ <EditForm class="form-category" OnValidSubmit="OnSubmitOption" Model="optionItem">
+         
+      <div class="col-md-2">
+          <NavLinkFluentAnchor  Href="@($"product")" Appearance="Appearance.Stealth"><span style="color:green;" class="glyph glyph-back"></span></NavLinkFluentAnchor> 
+      </div>
+         
+      <div class="col-md-6">
+
+          @if(products == null) 
+          {
+              <p><a href="/category">Insert</a> a new category </p>
+          } else {
+             
+               <InputSelect  class="form-control" id="products" @bind-Value="saveOptionDTO.ProductId">
+                                                  
+                       @foreach (var item in products)
+                          {
+                                                       
+                                 <option value="@item.Id">@item.ProductName</option>
+                           }
+                </InputSelect>
+                                                 <p>Product</p>
+           }
+
+                </div>
+                <div class="col-md-8">
+
+                    <FluentTextField id="inputCategory"  @bind-Value="saveOptionDTO.OptionName"  placeholder="@optionItem.OptionName"  ></FluentTextField>
+                    <ValidationMessage class="text-danger" For="@(() => saveOptionDTO.OptionName)" />
+
+
+                </div>
+
+                <div class="col-md-8">
+                    <FluentButton type="submit" Appearance="Appearance.Accent">Submit</FluentButton>
+                    <label class="text-danger">@error</label> 
+
+                </div>
+
+
+
+            </EditForm>
+        </FluentCard>
+    </div>
+
+</div>
+
+
+@code {
+    [Parameter]
+     public  int Id {get; set;}
+     string error { get; set; }
+
+     OptionDTO optionItem {get; set;} = new OptionDTO();
+     SaveOptionDTO saveOptionDTO {get; set;} = new SaveOptionDTO();
+
+     [Inject]
+    public IOptionDataService OptionDataService { get; set; }
+    [Inject]
+    public IProductDataService ProductDataService { get; set; }
+
+    async Task OnSubmitOption()
+    {
+        error = null;
+        try
+        {
+            await OptionDataService.UpdateOption(Id, saveOptionDTO);
+            toastService.ShowToast($"{saveOptionDTO.OptionName} updated succesfuly", ToastLevel.Success);
+            await OnInitializedAsync();
+             navigationManager.NavigateTo("/option");
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+             toastService.ShowToast($"{saveOptionDTO.OptionName} failed to add", ToastLevel.Error);
+        }
+    }
+    @functions {
+
+        private ProductDTO[] products { get; set; }
+        protected override async Task OnInitializedAsync()
+        {
+            products = await ProductDataService.GetProducts();
+            optionItem = await OptionDataService.GetOptionById(Id);
+        }
+    }
+}

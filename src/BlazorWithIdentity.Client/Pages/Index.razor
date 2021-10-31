@@ -1,0 +1,79 @@
+﻿@page "/"
+@attribute [Authorize]
+
+@using Microsoft.Fast.Components.FluentUI
+@inject ToastService toastService
+
+
+<AuthorizeView>
+    <Authorized>
+<div class="container">
+  <div class="row">
+    <h1></h1>
+  </div>
+</div>
+
+       <div class="container m-t-xs">
+  <div class="row">
+    <h1 class="type-h1">Title</h1>
+
+    <div class="col-md-10">
+      <h1 class="type-h3 color-type-accent">Subtitle to be a lengthy paragraph</h1>
+      <p class="type-p1">
+        Our Bible centered educational experience integrates opportunities to explore a variety of
+        interests while developing a strong Christian and academic foundation.
+        Each child enjoys a balanced experience that sets him or her on a path to life-long learning.
+        <br /><br />
+        We invite you, your child, and your family to visit our campus in Karen and Lavington so you can
+        get to know us and discover the true advantage of the Bunks and Biddles experience.
+        <br /><br />
+        The best way to get to know us is to take a tour. Schedule a visit or call us at 0722 344 127 today.
+        We look forward to meeting you!
+      </p>
+    </div>
+    <div class="col-md-14">
+      <h5>More News &amp; Anouncements</h5>
+   
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <h1></h1>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+           
+
+
+
+       
+
+    </Authorized>
+    <Authorizing>
+        <h1>Loading ...</h1>
+    </Authorizing>
+</AuthorizeView>
