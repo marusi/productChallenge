@@ -196,19 +196,32 @@ using BlazorWithIdentity.Shared.DTO.ProductSku;
          private ProductCategoryDTO[] categories { get; set; }
         protected override async Task OnInitializedAsync()
         {
-            var props = GetProperties(query);
-            foreach (var prop in props)
-		{
-
-                var combined = $"{prop.Key}={query.CategoryId}";
-                productSkus = await ProductSkuDataService.GetProductSkus(combined);
-		}
+          
 
              categories = await CategoryDataService.GetCategories();
+             OnFilterProducts();
            
-           
-         StateHasChanged();
+          
+            StateHasChanged();
+        
+        }        private  async Task OnFilterProducts()
+        {              var props = GetProperties(query);
+            foreach (var prop in props)
+		{
+                if (prop.Key != "CategoryId")
+                {
+                 // productSkus = await ProductSkuDataService.GetProductSkus("");  
+                } else if (prop.Key == "CategoryId") {
 
+                    var combined = $"{prop.Key}={prop.Value}";
+                    productSkus = await ProductSkuDataService.GetProductSkus(combined);
+                      await OnInitializedAsync();
+                 } else if (prop.Key == "OptionValueId") {
+
+                    var combined = $"{prop.Key}=";
+                    productSkus = await ProductSkuDataService.GetProductSkus(combined);
+                }
+		}
         }        private static Dictionary<string, string> GetProperties(object obj)
 	{
 		var props = new Dictionary<string, string>();
