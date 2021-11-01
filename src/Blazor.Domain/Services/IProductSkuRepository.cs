@@ -1,9 +1,7 @@
 ﻿using Blazor.Domain.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Blazor.Domain.Services
 {
@@ -13,5 +11,7 @@ namespace Blazor.Domain.Services
 
         void Add(ProductSku productSku);
         void Remove(ProductSku productSku);
+
+        Task<QueryResult<ProductSku>> GetProductSkus(ProductSkuQuery filter);
     }
 }

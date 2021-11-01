@@ -24,6 +24,7 @@ C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.S
 C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Shared\obj\Debug\net5.0\BlazorWithIdentity.Shared.AssemblyInfoInputs.cache
 C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Shared\obj\Debug\net5.0\BlazorWithIdentity.Shared.AssemblyInfo.cs
 C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Shared\obj\Debug\net5.0\BlazorWithIdentity.Shared.csproj.CoreCompileInputs.cache
+C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Shared\obj\Debug\net5.0\BlazorWithIdentity.Shared.csproj.CopyComplete
 C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Shared\obj\Debug\net5.0\BlazorWithIdentity.Shared.dll
 C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Shared\obj\Debug\net5.0\ref\BlazorWithIdentity.Shared.dll
 C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Shared\obj\Debug\net5.0\BlazorWithIdentity.Shared.pdb

@@ -206,7 +206,7 @@ using BlazorWithIdentity.Shared.DTO.SkuValue;
     string error { get; set; }
 
     ProductSkuDTO productSkuValueDTO { get; set; } = new ProductSkuDTO();
-  //  ProductCategoryDTO productCategoryDTO { get; set; } = new ProductCategoryDTO();
+    ProductSkuQueryDTO query { get; set; } = new ProductSkuQueryDTO();
    
      [Inject]
     public IProductSkuDataService ProductSkuDataService { get; set; }
@@ -247,13 +247,13 @@ using BlazorWithIdentity.Shared.DTO.SkuValue;
               
 
 
-        private ProductSkuDTO[] productSkus { get; set; }
+       private QueryResultDTO<ProductSkuDTO> productSkus { get; set; }
         private SkuValueDTO[] skuValues { get; set; }
-
+        string empty;
 
     protected override async Task OnInitializedAsync()
     {
-       productSkus = await ProductSkuDataService.GetProductSkus();
+       productSkus = await ProductSkuDataService.GetProductSkus(empty);
        skuValues = await SkuValueDataService.GetSkuValues();
 
 

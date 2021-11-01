@@ -245,8 +245,8 @@ C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.S
 C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Server\obj\Debug\net5.0\staticwebassets\BlazorWithIdentity.Server.StaticWebAssets.Manifest.cache
 C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Server\obj\Debug\net5.0\staticwebassets\BlazorWithIdentity.Server.StaticWebAssets.xml
 C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Server\obj\Debug\net5.0\BlazorWithIdentity.Server.RazorTargetAssemblyInfo.cache
+C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Server\obj\Debug\net5.0\BlazorWithIdentity.Server.csproj.CopyComplete
 C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Server\obj\Debug\net5.0\BlazorWithIdentity.Server.dll
 C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Server\obj\Debug\net5.0\ref\BlazorWithIdentity.Server.dll
 C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Server\obj\Debug\net5.0\BlazorWithIdentity.Server.pdb
 C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Server\obj\Debug\net5.0\BlazorWithIdentity.Server.genruntimeconfig.cache
-C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Server\obj\Debug\net5.0\BlazorWithIdentity.Server.csproj.CopyComplete

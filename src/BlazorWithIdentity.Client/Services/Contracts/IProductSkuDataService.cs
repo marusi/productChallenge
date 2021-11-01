@@ -12,7 +12,9 @@ namespace BlazorWithIdentity.Client.Services.Contracts
 
         Task UpdateProductSku(int id, SaveProductSkuDTO saveProductSkuDTO);
 
-        Task<ProductSkuDTO[]> GetProductSkus();
+       
+        Task<QueryResultDTO<ProductSkuDTO>> GetProductSkus(string filterResource);
+     
 
         Task<ProductSkuDTO> GetProductSkuById(int id);
 

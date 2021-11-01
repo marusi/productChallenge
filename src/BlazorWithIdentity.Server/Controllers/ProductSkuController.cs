@@ -33,22 +33,13 @@ namespace BlazorWithIdentity.Controllers
         }
 
         [HttpGet]
-        [Authorize]
-        public async Task<IEnumerable<ProductSkuDTO>> GetProductSku()
+        [Authorize]       
+        public async Task<QueryResultDTO<ProductSkuDTO>> GetProductSkus(ProductSkuQueryDTO filterResource)
         {
-            var productSkus = await context.ProductSkus.
-                 Include(p => p.SkuValue)
-                 .ThenInclude(a => a.OptionValue)
-                 .ThenInclude(b => b.Option)
-                 .ThenInclude(c => c.Product).ThenInclude(d => d.ProductCategory)
-                   .ToListAsync();
+            var filter = mapper.Map<ProductSkuQueryDTO, ProductSkuQuery>(filterResource);
+            var queryResult = await repository.GetProductSkus(filter);
 
-            return mapper.Map<List<ProductSku>, List<ProductSkuDTO>>(productSkus);
-
-            
-
-
-
+            return mapper.Map<QueryResult<ProductSku>, QueryResultDTO<ProductSkuDTO>>(queryResult);
         }
 
         [HttpPost]

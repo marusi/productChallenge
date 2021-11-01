@@ -140,6 +140,13 @@ using Microsoft.Fast.Components.FluentUI;
 #nullable disable
 #nullable restore
 #line 1 "C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Client\Pages\ProductList.razor"
+using BlazorWithIdentity.Shared.DTO.Category;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 2 "C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Client\Pages\ProductList.razor"
 using BlazorWithIdentity.Shared.DTO.ProductSku;
 
 #line default
@@ -153,14 +160,26 @@ using BlazorWithIdentity.Shared.DTO.ProductSku;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 98 "C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Client\Pages\ProductList.razor"
+#line 117 "C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Client\Pages\ProductList.razor"
        
 
-     ProductSkuDTO productSkuValueDTO { get; set; } = new ProductSkuDTO();
-  //  ProductCategoryDTO productCategoryDTO { get; set; } = new ProductCategoryDTO();
+    ProductSkuDTO productSkuValueDTO { get; set; } = new ProductSkuDTO();
+   ProductSkuQueryDTO query { get; set; } = new ProductSkuQueryDTO();
+     
    
+    string error { get; set; }
      [Inject]
     public IProductSkuDataService ProductSkuDataService { get; set; }
+
+      [Inject]
+    public ICategoryDataService CategoryDataService { get; set; }
+
+   
+
+  
+
+
+
 
     
 
@@ -168,18 +187,44 @@ using BlazorWithIdentity.Shared.DTO.ProductSku;
 #line hidden
 #nullable disable
 #nullable restore
-#line 106 "C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Client\Pages\ProductList.razor"
+#line 137 "C:\Users\Hp\Desktop\dddEven\TwoTouch\BlazorWithIdentity\src\BlazorWithIdentity.Client\Pages\ProductList.razor"
                 
 
 
-        private ProductSkuDTO[] productSkus { get; set; }
-
+        // private ProductSkuDTO[] productSkus { get; set; }
+        private QueryResultDTO<ProductSkuDTO> productSkus { get; set; }
+         private ProductCategoryDTO[] categories { get; set; }
         protected override async Task OnInitializedAsync()
         {
-            productSkus = await ProductSkuDataService.GetProductSkus();
-              StateHasChanged();
-             await OnInitializedAsync();
-        }            
+            var props = GetProperties(query);
+            foreach (var prop in props)
+		{
+
+                var combined = $"{prop.Key}={query.CategoryId}";
+                productSkus = await ProductSkuDataService.GetProductSkus(combined);
+		}
+
+             categories = await CategoryDataService.GetCategories();
+           
+           
+         StateHasChanged();
+
+        }        private static Dictionary<string, string> GetProperties(object obj)
+	{
+		var props = new Dictionary<string, string>();
+		if (obj == null)
+			return props;
+
+		var type = obj.GetType();
+		foreach (var prop in type.GetProperties())
+		{
+			var val = prop.GetValue(obj, new object[] { });
+			var valStr = val == null ? "" : val.ToString();
+			props.Add(prop.Name, valStr);
+		}
+
+		return props;
+	}            
 
         
 

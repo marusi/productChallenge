@@ -29,12 +29,20 @@ namespace BlazorWithIdentity.Client.Services.Implementations
             if (result.StatusCode == System.Net.HttpStatusCode.BadRequest) throw new Exception(await result.Content.ReadAsStringAsync());
             result.EnsureSuccessStatusCode();
         }
-
-        public async Task<ProductSkuDTO[]> GetProductSkus()
+      
+        public async Task<QueryResultDTO<ProductSkuDTO>> GetProductSkus(string filterResource)
         {
-            var result = await _httpClient.GetFromJsonAsync<ProductSkuDTO[]>(ProductSkuUrl);
+           // var props = GetProperties(filterResource);
+           
+           
+                var result = await _httpClient.GetFromJsonAsync<QueryResultDTO<ProductSkuDTO>>($"{ProductSkuUrl}?{filterResource}");
+               
+           
             return result;
         }
+
+       
+
 
         public async Task<ProductSkuDTO> GetProductSkuById(int id)
         {
@@ -56,5 +64,8 @@ namespace BlazorWithIdentity.Client.Services.Implementations
             if (result.StatusCode == System.Net.HttpStatusCode.BadRequest) throw new Exception(await result.Content.ReadAsStringAsync());
             result.EnsureSuccessStatusCode();
         }
+
+       
+
     }
 }
