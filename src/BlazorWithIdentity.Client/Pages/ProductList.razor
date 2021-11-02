@@ -3,13 +3,10 @@
 @using BlazorWithIdentity.Shared.DTO.ProductSku
 
 <div class="row row-sm">
-
-
-
-  <div class="col-md-12">
-  @*Pagination*@
-  </div>
-  <div class="col-md-12">
+     <div class="col-md-12">
+       @*Pagination*@
+     </div>
+    <div class="col-md-12">
     <div class="putbox-content">
       <div class="content-title"></div>
 
@@ -39,7 +36,7 @@
     </div>
   </div>
 
-</div>
+
   
 
 
@@ -75,6 +72,8 @@
   </li>
 } else
 {
+
+       <EditForm class="form-category" OnValidSubmit="OnSubmitComposite" Model="saveCompositeProductDTO">
     @foreach (var item in productSkus.Items)
     {
        <li class="list-items-row" >
@@ -101,13 +100,27 @@
                   <div class="content-text-tertiary ">
                    <div class="checkbox">
                 <label>
-                    <input onclick="addToArray(@item.Id)" type="checkbox" />
+                 
+                    @if (@item.Id > 0)
+                    {
+                          <input name="AreChecked" type="checkbox" 
+                            value="@item.Id" 
+                            @onchange = "eventArgs => { CheckChanged
+                            (saveCompositeProductDTO, eventArgs.Value, item.Id);}" />                                 
+                    }
+                     else
+                     {
+                     <input name="AreChecked" type="checkbox" 
+                            value="@item.Id"  checked
+                            @onchange="eventArgs => { CheckChanged
+                            (saveCompositeProductDTO, eventArgs.Value, item.Id);}" />
+                     }
                     <span>Pick</span>
                 </label>
             </div>
               </div>
             
-                       
+                   
 
                </div>
 
@@ -120,11 +133,14 @@
     </div>
   </li>
     }
+   
+      <button class="btn btn-secondary" onclick="ListUpdated()">Create Composite Selection</button>  
+    </EditForm>
 }
 
  
 </ol>
-
+</div>
 
 
 
@@ -192,7 +208,7 @@
             errorTwo = null;
             try
             {
-                if (saveCompositeProductDTO.CombinedProducts != null)
+                if (saveCompositeProductDTO != null)
                 {
                     // logic here
                     await CompositeProductDataService.CreateCompositeProduct(saveCompositeProductDTO);
@@ -209,6 +225,37 @@
             }
         }
 
+        protected async Task CheckChanged(SaveCompositeProductDTO saveProduct,
+                                     object checkValue, int id)
+       {
+            int number = 0;
+            if (id > number)
+            {
+                number = (int)id;
+               // saveProduct = await CompositeProductDataService.CreateCompositeProduct(saveCompositeProductDTO);
+                if((bool)checkValue)
+                {
+                    saveCompositeProductDTO.CombinedProducts.Add(number);
+                    saveCompositeProductDTO.CombinedProducts.ToList();
+                   
+
+
+                  //  await CompositeProductDataService.CreateCompositeProduct(saveProduct);
+                   //  toastService.ShowToast($"Product Created Succesfuly", ToastLevel.Success);
+                }
+            } else
+            {
+                
+            }
+          
+      }
+       
+   }
+    async Task ListUpdated()
+           {
+               await CompositeProductDataService.CreateCompositeProduct(saveCompositeProductDTO);
+                toastService.ShowToast($"Products Created Succesfuly", ToastLevel.Success);
+           }
         private  async Task OnFilterProducts()
         {
               var props = GetProperties(query);
@@ -252,11 +299,11 @@
 	}
 
 
-    
+  
 
      
 
             
 
-        }
+ }
 }
