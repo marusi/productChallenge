@@ -1,32 +1,37 @@
 ﻿@using BlazorWithIdentity.Shared.DTO.Category
+@using BlazorWithIdentity.Shared.DTO.CompositeProduct
 @using BlazorWithIdentity.Shared.DTO.ProductSku
 
 <div class="row row-sm">
+
+
+
   <div class="col-md-12">
   @*Pagination*@
   </div>
   <div class="col-md-12">
     <div class="putbox-content">
-      <div class="content-title">u</div>
+      <div class="content-title"></div>
 
       <div class="combobox">
 
           @if (categories== null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-         
-         <select  class="form-control"    @bind="query.CategoryId">
-                                                  
+        {
+                  
+        }
+            else
+        {
+         <h6>Categories Filter</h6>
+         <select  class="form-control" @onclick="OnFilterProducts"   @bind="query.CategoryId">
+                                                  <option value="">All Products</option>
                                                     @foreach (var item in categories)
                                                     {
                                                         <option value="@item.Id">@item.Name</option>
                                                     }
+                                                   
                                                 </select>
                                                  }
-
+  
       
       </div>
 
@@ -44,12 +49,6 @@ else
 
 
 <ol class="list-items">
-  <li class="list-items-row">
-     <p>@query.CategoryId</p> 
-
-  </li>
-
-
 
   @if (productSkus == null)
 {
@@ -62,6 +61,15 @@ else
            <div class="item-content-secondary">
               <div class="content-text-tertiary "> <span class="label label-danger">Nothing here</span>  </div>
           </div>
+           <div class="content-text-tertiary ">
+                  <div class="progress-bar">
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+    </div>
+            </div>
           </div>
           </div>
   </li>
@@ -74,18 +82,34 @@ else
       <div class="entity-list ">
         <div class="entity-list-item "  >
           <div class="item-icon">
-            <span class="glyph glyph-chevron-right"></span>
+            <span class="glyph glyph-chevron-right"> </span>
           </div>
           <div class="item-content-secondary">
                @item.SkuValue.SkuValueName
               <div class="content-text-tertiary "> <span class="label label-warning">@item.SkuValue.OptionValue.Option.Product.ProductCategory.Name</span>  </div>
+              
           </div>
 
           <div class="item-content-primary">
+              <div class="col-md-18">
 
-            <div class="content-text-primary ">@item.SkuValue.OptionValue.Option.Product.ProductName </div>
+                  <div class="content-text-primary ">@item.SkuValue.OptionValue.Option.Product.ProductName </div>
             <div class="content-text-secondary">@item.SkuValue.OptionValue.OptionValueName - KES @item.Price </div>
+            
+              </div>
+              <div class="col-md-6">
+                  <div class="content-text-tertiary ">
+                   <div class="checkbox">
+                <label>
+                    <input onclick="addToArray(@item.Id)" type="checkbox" />
+                    <span>Pick</span>
+                </label>
+            </div>
+              </div>
+            
+                       
 
+               </div>
 
           </div>
 
@@ -118,11 +142,14 @@ else
 
     ProductSkuDTO productSkuValueDTO { get; set; } = new ProductSkuDTO();
    ProductSkuQueryDTO query { get; set; } = new ProductSkuQueryDTO();
+
      
    
     string error { get; set; }
      [Inject]
     public IProductSkuDataService ProductSkuDataService { get; set; }
+    [Inject]
+    public ICompositeProductDataService CompositeProductDataService { get; set; }
 
       [Inject]
     public ICategoryDataService CategoryDataService { get; set; }
@@ -137,21 +164,54 @@ else
     @functions {
 
 
+
+
+
         // private ProductSkuDTO[] productSkus { get; set; }
         private QueryResultDTO<ProductSkuDTO> productSkus { get; set; }
          private ProductCategoryDTO[] categories { get; set; }
+
+          [Parameter]
+        public int Id { get; set; }
+
+        SaveCompositeProductDTO saveCompositeProductDTO { get; set; } = new SaveCompositeProductDTO();
+        string errorTwo { get; set; }
         protected override async Task OnInitializedAsync()
         {
           
-
+            await   OnFilterProducts();
              categories = await CategoryDataService.GetCategories();
-             OnFilterProducts();
-           
+         
           
-            StateHasChanged();
+            
         
-        }        private  async Task OnFilterProducts()
-        {              var props = GetProperties(query);
+        }
+
+        async Task OnSubmitComposite()
+        {
+            errorTwo = null;
+            try
+            {
+                if (saveCompositeProductDTO.CombinedProducts != null)
+                {
+                    // logic here
+                    await CompositeProductDataService.CreateCompositeProduct(saveCompositeProductDTO);
+                    toastService.ShowToast($"Product Created Succesfuly", ToastLevel.Success);
+                   
+                } else
+                {
+                     toastService.ShowToast($"Select at least two product", ToastLevel.Warning);
+                }
+            }
+            catch (Exception x)
+            {
+                errorTwo = x.Message;
+            }
+        }
+
+        private  async Task OnFilterProducts()
+        {
+              var props = GetProperties(query);
             foreach (var prop in props)
 		{
                 if (prop.Key != "CategoryId")
@@ -161,14 +221,20 @@ else
 
                     var combined = $"{prop.Key}={prop.Value}";
                     productSkus = await ProductSkuDataService.GetProductSkus(combined);
-                      await OnInitializedAsync();
+
+                 //   await OnInitializedAsync();
+                    // await OnFilterProducts();
+                 
+                 
                  } else if (prop.Key == "OptionValueId") {
 
                     var combined = $"{prop.Key}=";
                     productSkus = await ProductSkuDataService.GetProductSkus(combined);
                 }
 		}
-        }        private static Dictionary<string, string> GetProperties(object obj)
+        }
+
+        private static Dictionary<string, string> GetProperties(object obj)
 	{
 		var props = new Dictionary<string, string>();
 		if (obj == null)
@@ -183,7 +249,14 @@ else
 		}
 
 		return props;
-	}            
+	}
+
+
+    
+
+     
+
+            
 
         }
 }
