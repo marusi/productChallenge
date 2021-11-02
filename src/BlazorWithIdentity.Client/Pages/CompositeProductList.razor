@@ -12,8 +12,123 @@
 } else
 { 
     @foreach(var item in compositeProducts){
-        <h1>@item.Id</h1>
-    }
+      
+       
+ 
+
+  <div class="col-sm-22  ">
+   
+
+      <ol class="list-items">
+        <li class="list-items-row">
+          
+          <div data-toggle="collapse" aria-expanded="false" data-target="#list-item-line-@item.Id">
+            <div class="container">
+              <div class="row ">
+                <div class="col-md-16 type-h5">
+                  <span class="label label-success">KES @item.TotalPrice </span>
+                  <span class="typ-p4 color-type-secondary"> </span>
+               
+
+                </div>
+                 <div class="col-md-4 type-h6">
+       
+                    
+                 </div>
+                 <div class="col-md-4 type-h6">
+                        <i class="glyph glyph-chevron-right"></i>
+                  <i class="glyph glyph-chevron-down"></i>
+                 </div>
+
+              </div>
+              <div class="col-md-12 ">
+
+              </div>
+            </div>
+          </div>
+          <div class="collapse" id="list-item-line-@item.Id">
+            <div class="row">
+              <div class="col-md-18 col-md-offset-2 color-type-secondary">
+
+                <div class="row">
+                 @foreach(var product in item.CombinedProducts)
+                                    {
+                                     
+                  <FluentHorizontalScroll class="right-gradient top-align" Speed="600" Easing="ease-in-out" >
+            <FluentCard style="width:100%;height:100%" neutral-base-color="#3995C9">
+                <div class="contents">
+                      <p> @product.SkuValue.OptionValue.Option.Product.ProductName</p> 
+           <pre><code class="language-xml">
+ {
+      "id": @product.Id,
+      "price": @product.Price,
+      "skuValue": {
+        "id": @product.SkuValue.Id,
+        "skuValueName": "@product.SkuValue.SkuValueName",
+        "optionValue": {
+          "id": @product.SkuValue.OptionValue.Id,
+          "optionValueName": "@product.SkuValue.OptionValue.OptionValueName",
+          "option": {
+            "id": @product.SkuValue.OptionValue.Option.Id,
+            "optionName": "@product.SkuValue.OptionValue.Option.OptionName",
+            "product": {
+              "id": @product.SkuValue.OptionValue.Option.Product.Id,
+              "productName": "@product.SkuValue.OptionValue.Option.Product.ProductName",
+              "productCategory": {
+                "id": @product.SkuValue.OptionValue.Option.Product.ProductCategory.Id,
+                "name": "@product.SkuValue.OptionValue.Option.Product.ProductCategory.Name"
+              }
+            }
+          }
+        } 
+    
+        </code></pre>
+                   
+                </div>
+            </FluentCard>
+       </FluentHorizontalScroll>              }
+
+
+                 
+
+                </div>
+
+
+
+              </div>
+              <div class="col-md-4 ">
+ 
+              </div>
+            </div>
+          </div>
+           <div class="col-md-2 ">
+             <FluentButton class="type-h5" type="submit"   @onclick="(() => DeleteProduct(item.Id))" Appearance="Appearance.Stealth"><span style="color:red;" class="glyph glyph-delete "></span></FluentButton>
+             </div>
+        </li>
+        
+      </ol>
+
+
+
+   
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
     
 }
 
@@ -37,9 +152,22 @@
         {
             compositeProducts  = await CompositeProductDataService.GetCompositeProducts();
               StateHasChanged();
-             await OnInitializedAsync();
+            OnInitializedAsync();
         }
-            
+             protected async Task DeleteProduct(int Id)
+        {
+          await CompositeProductDataService.DeleteCompositeProduct(Id);
+          toastService.ShowToast($"Item({Id}) deleted succesfuly", ToastLevel.Success);
+            StateHasChanged();
+            await OnInitializedAsync();
+            //  StatusClass = "alert-success";
+          //  Message = "Deleted successfully";
+
+           // Saved = true;
+        }
+
+ 
+  }   
 
         }
 }
